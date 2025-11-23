@@ -319,6 +319,8 @@ Write instructions for using the skill and its bundled resources.
 
 ### Step 5: Packaging a Skill
 
+**Note for claude-manager packages:** When creating skills for claude-manager packages, you do NOT need to package the skill as a .skill file. The skills are copied directly into the package structure. Skip the packaging step and proceed directly to testing and iteration.
+
 Once development of the skill is complete, it must be packaged into a distributable .skill file that gets shared with the user. The packaging process automatically validates the skill first to ensure it meets all requirements:
 
 ```bash
