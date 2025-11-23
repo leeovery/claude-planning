@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Get the script directory
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd)"
+readonly script_dir
+
+# Get the Git repository root directory
+dir="$(git rev-parse --show-toplevel 2> /dev/null || echo "$script_dir")"
+readonly dir
+
+cd "$dir" || exit
+
+usage() {
+    cat << EOF
+Usage: $(basename "$0") [-M|--major|-m|--minor|-p|--patch] [-d|--dry-run] [-h|--help]
+
+Options:
+  -M, --major     Increment major version
+  -m, --minor     Increment minor version
+  -p, --patch     Increment patch version (default if no option specified)
+  -d, --dry-run   Dry run (don't make any changes)
+  -h, --help      Display this help message
+
+Example: $(basename "$0") -p
+         Create a patch release
+
+If no version increment option is specified, it will default to a patch increment.
+EOF
+}
+
+semver_increment() {
+    local -a parts
+    IFS='.' read -ra parts <<< "$1"
+
+    if [ ${#parts[@]} -ne 3 ]; then
+        echo "Semantic versions should have 3 components (for example: 1.2.3)" >&2
+        return 1
+    fi
+
+    case $2 in
+        major)
+            ((parts[0]++))
+            parts[1]=0
+            parts[2]=0
+            ;;
+        minor)
+            ((parts[1]++))
+            parts[2]=0
+            ;;
+        patch) ((parts[2]++)) ;;
+        *)
+            echo "Invalid increment type. Use major, minor, or patch." >&2
+            return 1
+            ;;
+    esac
+
+    echo "${parts[0]}.${parts[1]}.${parts[2]}"
+}
+
+get_current_version() {
+    # Read version from release.txt
+    local version
+    version=$(cat release.txt | sed 's/^v//')
+    echo "$version"
+}
+
+perform_release() {
+    local new_version=$1
+
+    # Update release.txt with new version
+    echo "${new_version}" > release.txt
+
+    # Commit release.txt
+    git add release.txt
+    git commit -m "🔖 Release v${new_version}"
+
+    # Create annotated tag
+    git tag -a "v${new_version}" -m "Release v${new_version}"
+
+    # Push commit and tag
+    git push origin HEAD "v${new_version}"
+
+    echo -e "\n"
+    echo "✅ Released v${new_version}"
+}
+
+main() {
+    local semver_type="patch"
+    local dry_run=false
+
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            -M | --major) semver_type="major" ;;
+            -m | --minor) semver_type="minor" ;;
+            -p | --patch) semver_type="patch" ;;
+            -d | --dry-run) dry_run=true ;;
+            -h | --help)
+                usage
+                exit 0
+                ;;
+            *)
+                echo "Unknown option: $1" >&2
+                usage
+                exit 1
+                ;;
+        esac
+        shift
+    done
+
+    # Check for dirty working directory
+    if [ "$(git status --porcelain)" ]; then
+        echo "Error: The git working directory is dirty (has uncommitted changes)."
+        echo "Please commit or stash your changes and run the script again to release."
+        exit 1
+    fi
+
+    local current_version
+    current_version=$(get_current_version)
+
+    local new_version
+    new_version=$(semver_increment "${current_version}" "${semver_type}")
+
+    echo -e "\nRelease"
+    echo " - this will be a ${semver_type} increment"
+    echo " - the current version is v${current_version}"
+    echo " - the new version will be v${new_version}"
+
+    if $dry_run; then
+        echo -e "\nDRY RUN: No changes will be made."
+    else
+        echo -e "\nThis will:"
+        echo " 1. Update release.txt to ${new_version}"
+        echo " 2. Commit release.txt"
+        echo " 3. Create git tag v${new_version}"
+        echo -e " 4. Push commit and tag\n"
+
+        echo -n "Proceed? [Y/n] "
+        read -r perform_update
+        if [[ $perform_update =~ ^[Nn]$ ]]; then
+            echo -e "\nABORTED"
+        else
+            perform_release "$new_version"
+        fi
+    fi
+}
+
+main "$@"

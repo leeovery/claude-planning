@@ -1,0 +1,21 @@
+{
+    "name": "leeovery/claude-planning",
+    "description": "Claude Code plugin: claude-planning",
+    "type": "claude-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lee Overy",
+            "email": "me@leeovery.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "leeovery/claude-manager": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "leeovery/claude-manager": true
+        }
+    }
+}
