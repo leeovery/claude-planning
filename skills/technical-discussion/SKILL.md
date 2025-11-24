@@ -29,7 +29,17 @@ See **[meeting-assistant.md](references/meeting-assistant.md)** for detailed app
 
 ## Structure
 
-Use **[template.md](references/template.md)** for discussions in `plan/discussion/`:
+Discussions are stored in `plan/discussion/<topic-name>/` directories. Each discussion gets its own directory containing one or more markdown files.
+
+**Single vs Multiple Files**:
+- Start with single file (e.g., `discussion.md`)
+- Break into multiple files as discussion evolves:
+  - `part-1.md`, `part-2.md` for long discussions
+  - `main-discussion.md`, `research-notes.md` for supporting material
+  - Topic-specific files if discussion naturally forks
+  - Diagrams, code examples, or other relevant artifacts
+
+Use **[template.md](references/template.md)** for structure:
 
 - **Context**: What sparked this
 - **Options Explored**: Approaches considered
@@ -49,12 +59,13 @@ See **[guidelines.md](references/guidelines.md)** for best practices and anti-ha
 
 ## Commit Frequently
 
-**Commit discussion docs often** to `plan/discussion/`:
+**Commit discussion docs often** to `plan/discussion/<topic-name>/`:
 
 - At natural breaks in discussion
 - When solutions to problems are identified
 - When discussion branches/forks to new topics
 - Before context refresh (prevents hallucination/memory loss)
+- When creating new files in the discussion directory
 
 **Why**: You lose memory on context refresh. Commits help you track, backtrack, and fill gaps. Critical for avoiding hallucination.
 

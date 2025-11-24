@@ -4,7 +4,7 @@
 
 ---
 
-Standard structure for `plan/discussion/` documents. DOCUMENT only - no plans or code.
+Standard structure for `plan/discussion/<topic-name>/` documents. Each discussion gets its own directory with one or more markdown files. DOCUMENT only - no plans or code.
 
 ## Template
 
@@ -116,10 +116,11 @@ Made decision on X, ruled out Y
 ## Usage Notes
 
 **When creating**:
-1. Create: `plan/discussion/{topic}.md`
-2. Fill header: date, status, participants
-3. Start with context: why discussing?
-4. List questions: what needs deciding?
+1. Create directory: `plan/discussion/<topic-name>/`
+2. Create initial file: `discussion.md` (or `part-1.md`, `main-discussion.md`)
+3. Fill header: date, status, participants
+4. Start with context: why discussing?
+5. List questions: what needs deciding?
 
 **During discussion**:
 - Update open questions as answered
@@ -127,6 +128,11 @@ Made decision on X, ruled out Y
 - Document false paths immediately
 - Record decisions with full rationale
 - Update current state
+- Create additional files as needed:
+  - Long discussions: `part-2.md`, `part-3.md`
+  - Supporting material: `research-notes.md`, `analysis.md`
+  - Forks/branches: Topic-specific files
+  - Artifacts: Code examples, diagrams, etc.
 
 **Optional sections**: Skip what doesn't apply. Always include Context, Decisions, Impact.
 
