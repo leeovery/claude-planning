@@ -4,7 +4,7 @@
 
 ---
 
-Standard structure for `docs/specs/discussions/<topic-name>/` documents. Each discussion gets its own directory with one or more markdown files. DOCUMENT only - no plans or code.
+Standard structure for `docs/specs/discussions/<topic-name>/discussion.md`. Each discussion gets its own directory with a single markdown file. DOCUMENT only - no plans or code.
 
 ## Template
 
@@ -13,136 +13,99 @@ Standard structure for `docs/specs/discussions/<topic-name>/` documents. Each di
 
 **Date**: YYYY-MM-DD
 **Status**: Exploring | Deciding | Concluded
-**Participants**: {Who}
 
 ## Context
 
-Problem, why now, pain point, current state.
+What this is about, why we're discussing it, the problem or opportunity, current state.
 
-## Open Questions
+### References
 
-- [ ] Question 1?
-- [ ] Question 2?
+- [Related spec or doc](link)
+- [Prior discussion](link)
 
-(Check off as answered)
+## Questions
 
-## Options Explored
+- [ ] How should we handle X?
+      - Sub-question about edge case
+      - Context: brief note if needed
+- [ ] What's the right approach for Y?
+- [ ] Should Z be separate or combined with W?
+      - Related: how does this affect A?
+- [ ] ...
 
-### Option: {Name}
+---
 
-**Pros**: Advantages
-**Cons**: Disadvantages
-**Trade-offs**: What we gain vs give up
+*Each question above gets its own section below. Check off as concluded.*
 
-(Repeat for each option)
+---
 
-## Back-and-Forth Debates
+## How should we handle X?
 
-When discussion prolonged/challenging - capture it!
+### Context
+Why this question matters, what's at stake.
 
-### Debate: {Topic}
+### Options Considered
+The approaches we looked at and their trade-offs.
 
-**Positions**: What each side argued
-**Arguments**: Pro/con for each, counter-points
-**Resolution**: What made us choose, small details that mattered
-**Learning**: What we learned
+### Journey
+The back-and-forth exploration. What we initially thought. What changed our thinking. False paths - "We considered A but realised B because C." The "aha" moments. Small details that mattered.
 
-## Edge Cases
+### Decision
+What we chose, why, the deciding factor, trade-offs accepted, confidence level.
 
-### Edge Case: {Description}
+---
 
-**Problem**: What's the edge case
-**Impact**: Why it matters
-**Solution**: How we'll address it
-**Status**: Solved | Needs Research | Acceptable Risk
+## What's the right approach for Y?
 
-## False Paths
+*(Same structure: Context → Options → Journey → Decision)*
 
-### False Path: {Name}
+---
 
-**Tried**: What we attempted
-**Why failed**: Reasons it didn't work
-**Learned**: Key insights
-**Revisit**: Conditions to reconsider
+## Summary
 
-## Decisions Made
+### Key Insights
+1. Cross-cutting learning from the discussion
+2. Something that applies broadly
 
-### Decision: {What}
-
-**Date**: YYYY-MM-DD
-**What chosen**: Clear statement
-**Rationale**: Why, deciding factor, trade-offs accepted
-**Alternatives**: What else considered, why rejected
-**Implications**: System impact, constraints, what enabled
-**Confidence**: High | Medium | Low (why?)
-
-## Key Insights
-
-1. Insight 1
-2. Insight 2
-
-## Impact
-
-**Who affected**: Users, teams
-**Problem solved**: What this fixes
-**Enabled**: New capabilities
-**Risk mitigated**: What safer now
-
-## Current State
-
-- What's clear now
+### Current State
+- What's resolved
 - What's still uncertain
-- Assumptions we're making
-- Needs more exploration
 
-## Next Steps
-
-What happens next (NOT implementation - just discussion/exploration):
+### Next Steps
 - [ ] Research X
 - [ ] Validate Y
-- [ ] Decide Z
-
-## Evolution Log
-
-Track how discussion evolved:
-
-### YYYY-MM-DD - Initial
-Started exploring {topic}
-
-### YYYY-MM-DD - {Milestone}
-Made decision on X, ruled out Y
 ```
 
 ## Usage Notes
 
 **When creating**:
 1. Create directory: `docs/specs/discussions/<topic-name>/`
-2. Create initial file: `discussion.md` (or `part-1.md`, `main-discussion.md`)
-3. Fill header: date, status, participants
+2. Create file: `discussion.md`
+3. Fill header: date, status
 4. Start with context: why discussing?
 5. List questions: what needs deciding?
 
 **During discussion**:
-- Update open questions as answered
-- Add options as explored
-- Document false paths immediately
-- Record decisions with full rationale
-- Update current state
-- Create additional files as needed:
-  - Long discussions: `part-2.md`, `part-3.md`
-  - Supporting material: `research-notes.md`, `analysis.md`
-  - Forks/branches: Topic-specific files
-  - Artifacts: Code examples, diagrams, etc.
+- Work through questions one at a time
+- Document options, journey, and decision for each
+- Check off questions as concluded
+- Keep journey contextual - false paths, debates, and "aha" moments belong with the question they relate to
 
-**Optional sections**: Skip what doesn't apply. Always include Context, Decisions, Impact.
+**Per-question structure**:
+- **Context**: Why this specific question matters
+- **Options Considered**: Approaches explored and their trade-offs
+- **Journey**: The exploration - what we thought, what changed, false paths, insights
+- **Decision**: What we chose, why, the deciding factor
+
+**Optional sections**: Not every question needs all four sub-sections. Context and Decision are most important. Options and Journey depend on complexity.
 
 **Anti-patterns**:
-- ❌ Don't turn into plan (no implementation steps)
-- ❌ Don't write code
-- ❌ Don't make it formal spec
+- Don't pull false paths into a separate top-level section - keep them with the question they relate to
+- Don't turn into plan (no implementation steps)
+- Don't write code
+- Don't summarise the journey - document it
 
 **Complete when**:
-- Major decisions made with rationale
-- Questions answered (or parked)
+- Major questions concluded with rationale
 - Trade-offs understood
 - Path forward clear
