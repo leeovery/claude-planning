@@ -29,25 +29,15 @@ See **[meeting-assistant.md](references/meeting-assistant.md)** for detailed app
 
 ## Structure
 
-Discussions are stored in `docs/specs/discussions/<topic-name>/` directories. Each discussion gets its own directory containing one or more markdown files.
-
-**Single vs Multiple Files**:
-- Start with single file (e.g., `discussion.md`)
-- Break into multiple files as discussion evolves:
-  - `part-1.md`, `part-2.md` for long discussions
-  - `main-discussion.md`, `research-notes.md` for supporting material
-  - Topic-specific files if discussion naturally forks
-  - Diagrams, code examples, or other relevant artifacts
+Discussions are stored in `docs/specs/discussions/<topic-name>/discussion.md`. Each discussion gets its own directory with a single markdown file.
 
 Use **[template.md](references/template.md)** for structure:
 
-- **Context**: What sparked this
-- **Options Explored**: Approaches considered
-- **Debates**: Back-and-forth, challenges
-- **False Paths**: What didn't work, why
-- **Decisions**: What we chose, rationale
-- **Edge Cases**: Problems solved
-- **Impact**: Why it matters
+- **Document-level**: Context, references, questions list
+- **Per-question**: Each question gets its own section with options, journey, and decision
+- **Summary**: Key insights, current state, next steps
+
+**Per-question structure** keeps the reasoning contextual. Options considered, false paths, debates, and "aha" moments belong with the specific question they relate to - not as separate top-level sections. This preserves the journey alongside the decision.
 
 ## Do / Don't
 
