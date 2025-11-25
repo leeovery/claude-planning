@@ -6,6 +6,8 @@
 
 Standard structure for `docs/specs/discussions/<topic-name>/discussion.md`. Each discussion gets its own directory with a single markdown file. DOCUMENT only - no plans or code.
 
+**This is a guide, not a form.** Use the structure to capture what naturally emerges from discussion. Don't force sections that didn't come up. The goal is to document the reasoning journey, not fill in every field.
+
 ## Template
 
 ```markdown
@@ -45,10 +47,22 @@ What this is about, why we're discussing it, the problem or opportunity, current
 Why this question matters, what's at stake.
 
 ### Options Considered
-The approaches we looked at and their trade-offs.
+The approaches we looked at. If pros/cons naturally emerged:
+
+**Option A**
+- Pros: ...
+- Cons: ...
+
+**Option B**
+- Pros: ...
+- Cons: ...
 
 ### Journey
 The back-and-forth exploration. What we initially thought. What changed our thinking. False paths - "We considered A but realised B because C." The "aha" moments. Small details that mattered.
+
+If there was notable debate:
+- **Positions**: What each side argued
+- **Resolution**: What made us choose, what detail tipped it
 
 ### Decision
 What we chose, why, the deciding factor, trade-offs accepted, confidence level.
@@ -93,11 +107,11 @@ What we chose, why, the deciding factor, trade-offs accepted, confidence level.
 
 **Per-question structure**:
 - **Context**: Why this specific question matters
-- **Options Considered**: Approaches explored and their trade-offs
-- **Journey**: The exploration - what we thought, what changed, false paths, insights
+- **Options Considered**: Approaches explored - include pros/cons if they naturally emerged
+- **Journey**: The exploration - what we thought, what changed, false paths, debates, insights
 - **Decision**: What we chose, why, the deciding factor
 
-**Optional sections**: Not every question needs all four sub-sections. Context and Decision are most important. Options and Journey depend on complexity.
+**Flexibility**: Not every question needs all sections. Some questions have clear options with pros/cons. Some have heated debate worth capturing. Some are straightforward. Document what naturally came up - don't force structure onto a simple discussion.
 
 **Anti-patterns**:
 - Don't pull false paths into a separate top-level section - keep them with the question they relate to
