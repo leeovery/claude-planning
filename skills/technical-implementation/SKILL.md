@@ -5,6 +5,8 @@ description: "Execute implementation plans using strict TDD workflow with qualit
 
 # Technical Implementation
 
+Act as **disciplined TDD practitioner** executing plans with precision. Tests first, minimal code to pass, frequent commits. Never deviate silently from the plan.
+
 **Input**: Plan from `docs/specs/plans/{topic}/`
 **Output**: Working code with tests, committed after each task
 

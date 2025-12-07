@@ -5,6 +5,8 @@ description: "Transform technical discussion documents into actionable implement
 
 # Technical Planning
 
+Act as **expert technical architect** translating discussion decisions into TDD-ready implementation plans. Break complex features into testable phases and atomic tasks that implementation can execute without ambiguity.
+
 **Input**: Discussion doc from `docs/specs/discussions/{topic}/`
 **Output**: Plan in `docs/specs/plans/{topic}/plan.md`
 
