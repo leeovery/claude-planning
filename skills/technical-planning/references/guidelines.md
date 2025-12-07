@@ -149,23 +149,28 @@ Understanding this helps you write better plans:
 
 **In plan, not production**: Examples show structure, not deployable code.
 
-```python
-# GOOD: Shows structure, error handling, approach
-class CacheManager:
-    def get(self, user_id: int, key: str) -> Optional[dict]:
-        cache_key = f"metrics:{user_id}:{key}"
-        try:
-            cached = self.redis.get(cache_key)
-            if cached:
-                return json.loads(cached)
-        except RedisError as e:
-            logger.error(f"Cache error: {e}")
-        return self._fetch_from_db(user_id, key)
+```php
+// GOOD: Shows structure, error handling, approach
+class CacheManager
+{
+    public function get(int $userId, string $key): ?array
+    {
+        $cacheKey = "metrics:{$userId}:{$key}";
+        try {
+            if ($cached = Redis::get($cacheKey)) {
+                return json_decode($cached, true);
+            }
+        } catch (RedisException $e) {
+            Log::warning("Cache error: {$e->getMessage()}");
+        }
+        return $this->fetchFromDb($userId, $key);
+    }
+}
 ```
 
-```python
-# BAD: Too vague
-# Add a cache manager class with methods for getting and setting values
+```php
+// BAD: Too vague
+// Add a cache manager class with methods for getting and setting values
 ```
 
 ## Testing Strategy

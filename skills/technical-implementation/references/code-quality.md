@@ -15,33 +15,35 @@ Every piece of knowledge should have a single, authoritative representation.
 ### Good DRY
 
 Repeated logic extracted:
-```python
-# Before: Logic duplicated
-def get_user_cache_key(user_id):
-    return f"cache:user:{user_id}"
+```php
+// Before: Logic duplicated
+function getUserCacheKey(int $userId): string {
+    return "cache:user:{$userId}";
+}
+function getMetricsCacheKey(int $userId): string {
+    return "cache:user:{$userId}:metrics";
+}
 
-def get_metrics_cache_key(user_id):
-    return f"cache:user:{user_id}:metrics"
-
-# After: Single source of truth
-def cache_key(user_id, *parts):
-    return f"cache:user:{user_id}" + ((":" + ":".join(parts)) if parts else "")
+// After: Single source of truth
+function cacheKey(int $userId, string ...$parts): string {
+    return "cache:user:{$userId}" . ($parts ? ':' . implode(':', $parts) : '');
+}
 ```
 
 ### Bad DRY: Premature Abstraction
 
 Don't create abstractions for code used once or twice:
-```python
-# Over-engineered: Used in one place
-class CacheKeyBuilder:
-    def __init__(self, prefix):
-        self.prefix = prefix
+```php
+// Over-engineered: Used in one place
+class CacheKeyBuilder {
+    public function __construct(private string $prefix) {}
+    public function build(string ...$parts): string {
+        return implode(':', [$this->prefix, ...$parts]);
+    }
+}
 
-    def build(self, *parts):
-        return ":".join([self.prefix, *parts])
-
-# Better: Just write the string
-cache_key = f"cache:user:{user_id}:metrics"
+// Better: Just write the string
+$cacheKey = "cache:user:{$userId}:metrics";
 ```
 
 ### Rule of Three
@@ -54,107 +56,112 @@ Wait until you have three instances before abstracting. Two similar blocks might
 
 Each class/function does one thing.
 
-```python
-# Bad: Does too much
-class UserService:
-    def create_user(self, data): ...
-    def send_welcome_email(self, user): ...
-    def generate_invoice(self, user): ...
-    def export_to_csv(self, users): ...
+```php
+// Bad: Does too much
+class UserService {
+    public function createUser($data) { }
+    public function sendWelcomeEmail($user) { }
+    public function generateInvoice($user) { }
+    public function exportToCsv($users) { }
+}
 
-# Good: Focused responsibility
-class UserService:
-    def create(self, data): ...
-    def update(self, user, data): ...
-    def delete(self, user): ...
+// Good: Focused responsibility
+class UserService {
+    public function create($data) { }
+    public function update($user, $data) { }
+    public function delete($user) { }
+}
 ```
 
 ### Open/Closed
 
 Open for extension, closed for modification.
 
-```python
-# Bad: Modify class to add new behavior
-class PaymentProcessor:
-    def process(self, payment):
-        if payment.type == "credit":
-            self._process_credit(payment)
-        elif payment.type == "paypal":
-            self._process_paypal(payment)
-        # Add new elif for each payment type...
+```php
+// Bad: Modify class to add new behavior
+class PaymentProcessor {
+    public function process(Payment $payment) {
+        match ($payment->type) {
+            'credit' => $this->processCredit($payment),
+            'paypal' => $this->processPaypal($payment),
+            // Add new case for each type...
+        };
+    }
+}
 
-# Good: Extend without modifying
-class PaymentProcessor:
-    def __init__(self, handlers: dict[str, PaymentHandler]):
-        self.handlers = handlers
+// Good: Extend without modifying
+class PaymentProcessor {
+    public function __construct(private array $handlers) {}
 
-    def process(self, payment):
-        handler = self.handlers.get(payment.type)
-        handler.process(payment)
+    public function process(Payment $payment) {
+        $this->handlers[$payment->type]->process($payment);
+    }
+}
 ```
 
 ### Liskov Substitution
 
 Subtypes must be substitutable for their base types.
 
-```python
-# Bad: Square breaks Rectangle's contract
-class Rectangle:
-    def set_width(self, w): self.width = w
-    def set_height(self, h): self.height = h
+```php
+// Bad: Square breaks Rectangle's contract
+class Rectangle {
+    public function setWidth(int $w) { $this->width = $w; }
+    public function setHeight(int $h) { $this->height = $h; }
+}
+class Square extends Rectangle {
+    public function setWidth(int $w) {
+        $this->width = $this->height = $w; // Violates expectations
+    }
+}
 
-class Square(Rectangle):
-    def set_width(self, w):
-        self.width = self.height = w  # Violates expectations
-
-# Good: Separate types or different design
-class Shape:
-    def area(self) -> float: ...
-
-class Rectangle(Shape): ...
-class Square(Shape): ...
+// Good: Separate types
+interface Shape { public function area(): float; }
+class Rectangle implements Shape { }
+class Square implements Shape { }
 ```
 
 ### Interface Segregation
 
 Don't force classes to implement methods they don't use.
 
-```python
-# Bad: Forces empty implementations
-class Worker:
-    def work(self): ...
-    def eat(self): ...
-    def sleep(self): ...
+```php
+// Bad: Forces empty implementations
+interface Worker {
+    public function work();
+    public function eat();
+    public function sleep();
+}
+class Robot implements Worker {
+    public function eat() { } // Robots don't eat
+    public function sleep() { } // Robots don't sleep
+}
 
-class Robot(Worker):
-    def eat(self): pass   # Robots don't eat
-    def sleep(self): pass # Robots don't sleep
+// Good: Separate interfaces
+interface Workable { public function work(); }
+interface Eatable { public function eat(); }
 
-# Good: Separate interfaces
-class Workable:
-    def work(self): ...
-
-class Eatable:
-    def eat(self): ...
-
-class Robot(Workable): ...
-class Human(Workable, Eatable): ...
+class Robot implements Workable { }
+class Human implements Workable, Eatable { }
 ```
 
 ### Dependency Inversion
 
 Depend on abstractions, not concretions.
 
-```python
-# Bad: Tightly coupled
-class OrderService:
-    def __init__(self):
-        self.db = MySQLDatabase()  # Concrete dependency
+```php
+// Bad: Tightly coupled
+class OrderService {
+    private MySQLDatabase $db;
+    public function __construct() {
+        $this->db = new MySQLDatabase(); // Concrete dependency
+    }
+}
 
-# Good: Depends on abstraction
-class OrderService:
-    def __init__(self, db: Database):
-        self.db = db  # Can inject any Database implementation
+// Good: Depends on abstraction (Laravel style)
+class OrderService {
+    public function __construct(private Database $db) { }
+}
 ```
 
 ## Cyclomatic Complexity
@@ -173,44 +180,44 @@ Cyclomatic complexity counts independent paths through code. High complexity = h
 ### Reducing Complexity
 
 **Extract methods:**
-```python
-# Before: Complex nested logic
-def process_order(order):
-    if order.is_valid():
-        if order.has_stock():
-            if order.payment_cleared():
-                # ... more nesting
+```php
+// Before: Complex nested logic
+public function processOrder(Order $order) {
+    if ($order->isValid()) {
+        if ($order->hasStock()) {
+            if ($order->paymentCleared()) {
+                // ... more nesting
 
-# After: Flat and clear
-def process_order(order):
-    if not order.is_valid():
-        return Error("Invalid order")
-    if not order.has_stock():
-        return Error("Out of stock")
-    if not order.payment_cleared():
-        return Error("Payment failed")
-    return complete_order(order)
+// After: Flat and clear
+public function processOrder(Order $order) {
+    if (!$order->isValid()) return new Error('Invalid order');
+    if (!$order->hasStock()) return new Error('Out of stock');
+    if (!$order->paymentCleared()) return new Error('Payment failed');
+    return $this->completeOrder($order);
+}
 ```
 
 **Early returns:**
-```python
-# Before: Single exit point
-def get_discount(user):
-    discount = 0
-    if user.is_premium:
-        if user.years > 5:
-            discount = 20
-        else:
-            discount = 10
-    return discount
+```php
+// Before: Single exit point
+public function getDiscount(User $user): int {
+    $discount = 0;
+    if ($user->is_premium) {
+        if ($user->years > 5) {
+            $discount = 20;
+        } else {
+            $discount = 10;
+        }
+    }
+    return $discount;
+}
 
-# After: Early returns
-def get_discount(user):
-    if not user.is_premium:
-        return 0
-    if user.years > 5:
-        return 20
-    return 10
+// After: Early returns
+public function getDiscount(User $user): int {
+    if (!$user->is_premium) return 0;
+    if ($user->years > 5) return 20;
+    return 10;
+}
 ```
 
 **Replace conditionals with polymorphism:**

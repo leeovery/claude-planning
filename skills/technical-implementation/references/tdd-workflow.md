@@ -235,15 +235,17 @@ If you keep modifying tests, the design may be unclear. Stop and review the plan
 **RED**:
 ```php
 test('it gets cached value when hit', function () {
+    // Arrange
     $redis = Mockery::mock(Redis::class);
     $redis->shouldReceive('get')
         ->with('metrics:1:views')
         ->andReturn('{"count": 42}');
-
     $cache = new CacheManager($redis);
 
+    // Act
     $result = $cache->get(userId: 1, key: 'views');
 
+    // Assert
     expect($result)->toBe(['count' => 42]);
 });
 ```
