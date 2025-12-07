@@ -132,16 +132,8 @@ Triggers and steps
 
 **Task**: One TDD cycle (test → implement → commit), ~5-30 min
 
-**Good**:
-```markdown
-1. **CacheManager.get()**
-   - **Do**: Return cached value if exists and not expired
-   - **Test**: `"it gets cached value when hit"`
-   - **Edge cases**: Return null on miss
-```
-
-**Bad** (too big): "Implement caching layer"
-**Bad** (too vague): "Handle errors"
+**Too big**: "Implement caching layer" (multiple TDD cycles)
+**Too vague**: "Handle errors" (no testable criteria)
 
 ## Ready for Implementation
 
