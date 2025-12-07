@@ -49,24 +49,16 @@ Derived tests:
 
 ### Test Naming
 
-Use descriptive test names that read as natural sentences:
-- Start with "it"
-- Use lowercase with spaces
-- Should read like "it [does something]"
-
-Examples:
-- `"it gets cached value when key exists"`
-- `"it stores value with configured ttl"`
-- `"it removes key silently when not found"`
+Follow the naming conventions for the language or framework being used. Check project-specific skills or existing tests for the established pattern.
 
 ### Write Test Names First
 
 Before writing test bodies, list all test names:
 ```php
-it('gets cached value when hit');
-it('fetches from db on miss');
-it('caches db result after fetch');
-it('handles redis connection error');
+test('it gets cached value when hit');
+test('it fetches from db on miss');
+test('it caches db result after fetch');
+test('it handles redis connection error');
 ```
 
 Confirm coverage matches task acceptance criteria before implementing.
@@ -152,7 +144,7 @@ Types: `feat`, `fix`, `refactor`, `test`
 Test has wrong assertion:
 ```php
 // Bug: should expect 300, not 200
-it('uses config value for ttl', function () {
+test('it uses config value for ttl', function () {
     expect($cache->ttl)->toBe(200); // Config says 300
 });
 ```
@@ -164,7 +156,7 @@ Fix: Correct the assertion to match intended behavior.
 Test is brittle, unclear, or tests implementation instead of behavior:
 ```php
 // Bad: Tests internal implementation detail
-it('uses redis setex', function () {
+test('it uses redis setex', function () {
     $cache->set('key', 'value');
     $mockRedis->shouldHaveReceived('setex')->once();
 });
@@ -177,7 +169,7 @@ Fix: Rewrite to test behavior, not implementation.
 Test fails due to missing fixture or setup:
 ```php
 // Missing: needs database seeding
-it('returns user metrics', function () {
+test('it returns user metrics', function () {
     $result = $cache->getMetrics(userId: 1);
     expect($result['count'])->toBe(5); // No user exists
 });
@@ -198,7 +190,7 @@ public function get($key)
 }
 
 // BAD: Changing test to match broken code
-it('returns cached value', function () {
+test('it returns cached value', function () {
     expect($cache->get('key'))->toBeNull(); // Was: ->toBe('value')
 });
 ```
@@ -242,7 +234,7 @@ If you keep modifying tests, the design may be unclear. Stop and review the plan
 
 **RED**:
 ```php
-it('gets cached value when hit', function () {
+test('it gets cached value when hit', function () {
     $redis = Mockery::mock(Redis::class);
     $redis->shouldReceive('get')
         ->with('metrics:1:views')
