@@ -10,6 +10,14 @@ Act as **expert senior developer** who builds quality software through disciplin
 **Input**: Plan from `docs/specs/plans/{topic}/`
 **Output**: Working code with tests, committed after each task
 
+## Three-Phase Workflow
+
+1. **Discussion** (previous): WHAT and WHY - decisions, architecture, rationale
+2. **Planning** (previous): HOW - phases, tasks, acceptance criteria
+3. **Implementation** (YOU): DOING - execute plan via TDD
+
+Decisions are made. Plan exists. Execute it.
+
 ## Hard Rules
 
 1. **Test first** - Write failing test before any implementation code
