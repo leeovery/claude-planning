@@ -1,10 +1,8 @@
 # TDD Workflow
 
-*Part of **[technical-implementation](../SKILL.md)** | See also: **[code-quality.md](code-quality.md)** · **[plan-execution.md](plan-execution.md)***
+*Reference for **[technical-implementation](../SKILL.md)***
 
 ---
-
-Strict test-driven development process for implementation.
 
 ## The Cycle
 
@@ -12,225 +10,106 @@ Strict test-driven development process for implementation.
 RED → GREEN → REFACTOR → COMMIT
 ```
 
-1. **RED**: Write a failing test
-2. **GREEN**: Write minimal code to pass
-3. **REFACTOR**: Clean up (only when green)
-4. **COMMIT**: Save progress
-
 Repeat for each task.
 
 ## RED: Write Failing Test
 
-### Before Writing Any Code
+1. Read task's Test field
+2. Write test asserting that behavior
+3. Run test - must fail
+4. Verify it fails for the right reason
 
-- Read the task's acceptance criteria
-- Identify what behavior to test
-- Write the test that asserts that behavior
-- Run the test - it MUST fail
-- Verify it fails for the RIGHT reason
-
-### Deriving Tests from Plan Tasks
-
-Plan task example:
+**Derive tests from plan**:
 ```markdown
-**Task: Implement CacheManager.get()**
-- Returns cached value if exists and not expired
-- Edge case: Handle cache connection failure gracefully
-- Micro acceptance: "it gets cached value when hit"
+Task: CacheManager.get()
+- Do: Return cached value if exists
+- Test: "it gets cached value when hit"
+- Edge cases: Handle connection failure
 ```
 
 Derived tests:
 ```
 "it gets cached value when hit"
-"it returns null when cache miss"
-"it fetches from database on miss"
-"it handles connection failure gracefully"
+"it returns null on miss"
+"it handles connection failure"
 ```
-
-### Test Naming
-
-Follow the naming conventions for the language or framework being used. Check project-specific skills or existing tests for the established pattern.
-
-### Write Test Names First
-
-Before writing test bodies, list all test names:
-```php
-test('it gets cached value when hit');
-test('it fetches from db on miss');
-test('it caches db result after fetch');
-test('it handles redis connection error');
-```
-
-Confirm coverage matches task acceptance criteria before implementing.
 
 ## GREEN: Minimal Implementation
 
-### Only Enough to Pass
-
-Write the simplest code that makes the test pass:
-
+Write the simplest code that passes:
 - No extra features
 - No "while I'm here" improvements
 - No edge cases not yet tested
-- No optimization
 
 If you think "I should also handle X" - stop. Write a test for X first.
 
-### One Test at a Time
+**One test at a time**: Write → Pass → Commit → Next
 
-- Write one test
-- Make it pass
-- Commit
-- Next test
+## REFACTOR: Only When Green
 
-Don't write multiple failing tests then implement all at once.
-
-## REFACTOR: Clean When Green
-
-### Only When Tests Pass
-
-Refactoring happens AFTER green, never during red.
-
-### What to Refactor
-
-- Remove duplication (DRY)
+**Do**:
+- Remove duplication
 - Improve naming
 - Extract methods for clarity
-- Simplify complex logic
 
-### What NOT to Refactor
+**Don't**:
+- Touch code outside current task
+- Optimize prematurely
+- Add unrelated improvements
 
-- Code outside current task scope
-- "Improvements" unrelated to current work
-- Optimization (unless tests require performance)
+Run tests after. If they fail, undo.
 
-### Tests Still Pass?
-
-Run tests after refactoring. If they fail, you broke something. Undo and try again.
-
-## COMMIT: Save Progress
-
-### After Every Green
+## COMMIT: After Every Green
 
 ```bash
-git add .
-git commit -m "feat(cache): implement get() with cache hit handling"
+git commit -m "feat(cache): implement get() with cache hit handling
+
+Task: Phase 2, Task 1"
 ```
 
-### Commit Message Format
+## When Tests CAN Change
 
-```
-type(scope): brief description
-
-- Detail 1
-- Detail 2
-
-Task: Phase X, Task Y
-```
-
-Types: `feat`, `fix`, `refactor`, `test`
-
-### Why Frequent Commits?
-
-- Easy to bisect if something breaks
-- Clear history of implementation steps
-- Safe rollback points
-- Can squash before PR if desired
-
-## When Tests CAN Be Changed
-
-### Genuine Bugs in Test
-
-Test has wrong assertion:
+**Genuine bug in test**:
 ```php
-// Bug: should expect 300, not 200
-test('it uses config value for ttl', function () {
-    expect($cache->ttl)->toBe(200); // Config says 300
-});
+// Wrong: config says 300, not 200
+expect($cache->ttl)->toBe(200);
 ```
+Fix: Correct assertion to match intended behavior.
 
-Fix: Correct the assertion to match intended behavior.
-
-### Poor Test Design
-
-Test is brittle, unclear, or tests implementation instead of behavior:
+**Tests implementation, not behavior**:
 ```php
-// Bad: Tests internal implementation detail
-test('it uses redis setex', function () {
-    $cache->set('key', 'value');
-    $mockRedis->shouldHaveReceived('setex')->once();
-});
+// Bad: tests internal detail
+$mockRedis->shouldHaveReceived('setex')->once();
 ```
+Fix: Rewrite to test behavior.
 
-Fix: Rewrite to test behavior, not implementation.
-
-### Missing Setup
-
-Test fails due to missing fixture or setup:
+**Missing setup**:
 ```php
-// Missing: needs database seeding
-test('it returns user metrics', function () {
-    $result = $cache->getMetrics(userId: 1);
-    expect($result['count'])->toBe(5); // No user exists
-});
+// Fails because no user exists
+$cache->getMetrics(userId: 1);
 ```
-
 Fix: Add proper test setup.
 
-## When Tests CANNOT Be Changed
+## When Tests CANNOT Change
 
-### To Make Broken Code Pass
+**To make broken code pass**: The test was right. Fix the code.
 
-**Never do this:**
-```php
-// Code returns wrong value
-public function get($key)
-{
-    return null; // Bug: should return cached value
-}
+**To avoid difficult work**: If test requires complex implementation, that's the job.
 
-// BAD: Changing test to match broken code
-test('it returns cached value', function () {
-    expect($cache->get('key'))->toBeNull(); // Was: ->toBe('value')
-});
-```
-
-The test was right. The code is wrong. Fix the code.
-
-### To Avoid Difficult Implementation
-
-If the test requires complex implementation, that's the job. Don't simplify the test to avoid the work.
-
-### To "Temporarily" Skip
-
-Don't comment out or skip tests to proceed. Fix the issue or escalate.
+**To skip temporarily**: Don't comment out tests. Fix or escalate.
 
 ## Red Flags
 
-### Writing Code Before Tests
+| Flag | Action |
+|------|--------|
+| Wrote code before test | Delete code. Write test first. |
+| Multiple failing tests | Work on one at a time |
+| Test passes immediately | Investigate - test may be wrong |
+| Changing tests frequently | Design unclear - review plan |
 
-Stop. Delete the code. Write the test first.
+## Example Cycle
 
-### Multiple Failing Tests
-
-Work on one test at a time. Comment out others if needed (uncomment before committing).
-
-### Test Passes Immediately
-
-Either:
-- Test is wrong (doesn't test what you think)
-- Code already exists (check for duplication)
-- Test is trivial (might still be valid)
-
-Investigate before proceeding.
-
-### Changing Tests Frequently
-
-If you keep modifying tests, the design may be unclear. Stop and review the plan or discussion.
-
-## Example TDD Cycle
-
-**Task**: Implement `CacheManager::get()` - gets cached value when hit
+**Task**: CacheManager.get() - Test: "it gets cached value when hit"
 
 **RED**:
 ```php
@@ -241,46 +120,29 @@ test('it gets cached value when hit', function () {
         ->andReturn('{"count": 42}');
 
     $cache = new CacheManager($redis);
-
     $result = $cache->get(userId: 1, key: 'views');
 
     expect($result)->toBe(['count' => 42]);
 });
 ```
-
-Run: `FAIL - Class CacheManager does not exist`
+Run: FAIL - Class CacheManager does not exist
 
 **GREEN**:
 ```php
 class CacheManager
 {
-    public function __construct(
-        private Redis $redis
-    ) {}
+    public function __construct(private Redis $redis) {}
 
     public function get(int $userId, string $key): ?array
     {
         $cacheKey = "metrics:{$userId}:{$key}";
         $cached = $this->redis->get($cacheKey);
-
-        if ($cached) {
-            return json_decode($cached, true);
-        }
-
-        return null;
+        return $cached ? json_decode($cached, true) : null;
     }
 }
 ```
+Run: PASS
 
-Run: `PASS`
+**COMMIT**: `feat(cache): implement CacheManager::get()`
 
-**REFACTOR**: (none needed for now)
-
-**COMMIT**:
-```bash
-git commit -m "feat(cache): implement CacheManager::get() for cache hits
-
-Task: Phase 2, Task 1"
-```
-
-Next test: `it 'returns null on cache miss'`
+Next test: "it returns null on cache miss"
