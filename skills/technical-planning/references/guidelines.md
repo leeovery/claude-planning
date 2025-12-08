@@ -16,7 +16,7 @@
 **Each phase should**:
 - Be independently testable
 - Have clear acceptance criteria (checkboxes)
-- Contain 3-7 tasks
+- Contain as many tasks as needed
 - Provide incremental value
 
 **Good progression**: Foundation → Core functionality → Edge cases → Refinement
@@ -47,15 +47,11 @@ Extract each edge case from discussion. For each:
 - Create a task with micro acceptance
 - Assign to specific phase
 
-## When to Include Code Examples
-
-Only for novel patterns not obvious to implement. Show structure, not production code.
-
 ## Quality Checklist
 
 **Structure**:
 - [ ] Clear phases with acceptance criteria
-- [ ] Each phase has 3-7 TDD-sized tasks
+- [ ] Each phase has TDD-sized tasks
 - [ ] Each task has micro acceptance (test name)
 
 **Content**:

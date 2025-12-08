@@ -123,7 +123,7 @@ Triggers and steps
 
 ## Sizing
 
-**Phase**: 3-7 tasks, independently testable, verifiable completion
+**Phase**: Independently testable, verifiable completion
 
 **Task**: One TDD cycle (test → implement → commit), ~5-30 min
 
