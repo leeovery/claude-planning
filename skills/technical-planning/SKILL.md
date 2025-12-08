@@ -7,7 +7,26 @@ description: "Transform technical discussion documents into actionable implement
 
 Act as **expert technical architect** translating discussion decisions into TDD-ready implementation plans. Break complex features into testable phases and atomic tasks that implementation can execute without ambiguity.
 
-Convert discussion docs into implementation plans. Output: `docs/specs/plans/{topic-name}/` with plan files.
+Convert discussion docs into implementation plans. Output location depends on chosen destination.
+
+## Output Destinations
+
+Plans can be stored in different formats depending on user preference. You will be told which destination to use (typically via the `start-planning` command).
+
+| Destination | Best For | Output |
+|-------------|----------|--------|
+| **Local Markdown** | Simple features, solo work | Single `plan.md` file |
+| **Linear** | Team collaboration, visual tracking | Linear project + local pointer |
+| **Tasks.md** | Local Kanban board, visual + versioned | Directory of task files |
+
+Reference the appropriate adapter for output format:
+- **[output-local-markdown.md](references/output-local-markdown.md)** - Single plan.md file
+- **[output-linear.md](references/output-linear.md)** - Linear project with milestones/issues
+- **[output-tasks-md.md](references/output-tasks-md.md)** - Directory structure for Tasks.md
+
+**Default**: If no destination specified, use local markdown.
+
+The planning *approach* is the same regardless of destination. Only the output format changes.
 
 ## Four-Phase Workflow
 
@@ -77,9 +96,15 @@ Implementation will:
 
 ## Reference Files
 
-- **[template.md](references/template.md)** - Plan structure with phase/task hierarchy
+**Planning approach**:
 - **[planning-approach.md](references/planning-approach.md)** - Workflow, step-by-step
 - **[guidelines.md](references/guidelines.md)** - Best practices, task sizing
+- **[template.md](references/template.md)** - Plan document template (for local markdown)
+
+**Output adapters** (use based on chosen destination):
+- **[output-local-markdown.md](references/output-local-markdown.md)** - Single plan.md file
+- **[output-linear.md](references/output-linear.md)** - Linear project integration
+- **[output-tasks-md.md](references/output-tasks-md.md)** - Tasks.md Kanban format
 
 ## Remember
 
