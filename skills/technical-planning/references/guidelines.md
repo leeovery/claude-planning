@@ -16,7 +16,6 @@
 **Each phase should**:
 - Be independently testable
 - Have clear acceptance criteria (checkboxes)
-- Contain as many tasks as needed
 - Provide incremental value
 
 **Good progression**: Foundation → Core functionality → Edge cases → Refinement
