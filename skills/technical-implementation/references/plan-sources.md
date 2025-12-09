@@ -10,146 +10,65 @@ Plans are always stored in `docs/specs/plans/{topic}/plan.md`. The file's frontm
 
 Always read `plan.md` first and check the `format` field in frontmatter:
 
-```yaml
----
-format: local-markdown | linear | backlog-md
----
-```
-
 | Format | Meaning | How to Proceed |
 |--------|---------|----------------|
 | `local-markdown` | Full plan is in this file | Read content directly |
 | `linear` | Plan managed in Linear | Query Linear via MCP |
 | `backlog-md` | Tasks in Backlog.md | Query via MCP or read `backlog/` |
 
-## Local Markdown (`format: local-markdown`)
+For full format details, see the planning skill's output adapters:
+- [output-local-markdown.md](../../technical-planning/references/output-local-markdown.md)
+- [output-linear.md](../../technical-planning/references/output-linear.md)
+- [output-backlog-md.md](../../technical-planning/references/output-backlog-md.md)
 
-**Frontmatter**:
-```yaml
----
-format: local-markdown
----
-```
+## Reading Plans
 
-**Reading**:
+### Local Markdown
+
 1. Read `plan.md` - all content is inline
 2. Phases and tasks are in the document
 3. Follow phase order as written
-4. Tasks have micro acceptance in the file
 
-**Structure**:
-```markdown
-## Phase 1: {Name}
-**Tasks**:
-1. **{Task Name}**
-   - **Do**: What to implement
-   - **Test**: `"it does expected behavior"`
-```
+### Linear
 
-## Linear (`format: linear`)
-
-**Frontmatter**:
-```yaml
----
-format: linear
-project: PROJECT_NAME
-project_id: abc123-def456
-team: Engineering
----
-```
-
-**Reading**:
-1. Extract `project_id` and `team` from frontmatter
+1. Extract `project_id` from frontmatter
 2. Query Linear MCP for project milestones (phases)
 3. Query Linear MCP for issues within each milestone (tasks)
 4. Process in milestone order
 
-**MCP Queries**:
-- Get milestones for project (phases)
-- Get issues per milestone (tasks)
-- Issue description contains: Goal, Implementation, Tests, Edge Cases
+**Fallback**: If Linear MCP is unavailable, inform user and suggest checking MCP configuration.
 
-**Updating Progress**:
-- After completing each task, update issue status in Linear via MCP
-- User sees real-time progress in Linear UI
+### Backlog.md
 
-**Fallback**:
-If Linear MCP is unavailable:
-- Inform the user
-- Cannot proceed without MCP access
-- Suggest checking MCP configuration
-
-## Backlog.md (`format: backlog-md`)
-
-**Frontmatter**:
-```yaml
----
-format: backlog-md
-project: TOPIC_NAME
----
-```
-
-**Reading**:
 1. If Backlog.md MCP is available, query tasks via MCP
 2. Otherwise, read task files from `backlog/` directory
 3. Filter tasks by label (e.g., `phase-1`) or naming convention
 4. Process in priority order (high → medium → low)
 
-**Structure**:
-```
-backlog/
-├── task-1 - [P1] Configure auth.md
-├── task-2 - [P1] Add login endpoint.md
-├── task-3 - [P2] Session management.md
-└── completed/                        # Done tasks
-```
+**Fallback**: Can read `backlog/` files directly if MCP unavailable.
 
-**Task file contains**:
-```markdown
----
-status: To Do
-priority: high
-labels: [phase-1, api]
----
+## Updating Progress
 
-# Task Title
+### Local Markdown
+- Check off acceptance criteria in the plan file
+- Update phase status as phases complete
 
-{Description}
+### Linear
+- Update issue status in Linear via MCP after each task
+- User sees real-time progress in Linear UI
 
-## Plan
-{What to do}
-
-## Acceptance Criteria
-1. [ ] Test written: `it does expected behavior`
-2. [ ] Implementation complete
-3. [ ] Tests passing
-4. [ ] Committed
-
-## Notes
-- Discussion: docs/specs/discussions/{topic}/discussion.md
-```
-
-**Updating Progress**:
+### Backlog.md
 - Update task status to "In Progress" when starting
-- Check off acceptance criteria items
+- Check off acceptance criteria items in task file
 - Update status to "Done" when complete
-- Backlog.md auto-moves to completed folder via CLI
+- Backlog.md CLI auto-moves to completed folder
 
-**MCP Tools** (if available):
-- Query tasks by status/label
-- Update task status
-- Add notes to tasks
+## Execution Workflow
 
-## Common Patterns
-
-Regardless of format, you'll find:
-- **Phases** with acceptance criteria
-- **Tasks** with micro acceptance (test names)
-- **Discussion reference** for context
-
-Execute the same TDD workflow for all formats:
+Regardless of format, execute the same TDD workflow:
 1. Derive test from micro acceptance
 2. Write failing test
 3. Implement to pass
 4. Commit
-5. Repeat
+5. Update progress
+6. Repeat
