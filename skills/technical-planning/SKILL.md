@@ -21,7 +21,7 @@ Plans can be stored in different formats depending on user preference. You will 
 
 Reference the appropriate adapter for output format:
 - **[output-local-markdown.md](references/output-local-markdown.md)** - Single plan.md file
-- **[output-linear.md](references/output-linear.md)** - Linear project with milestones/issues
+- **[output-linear.md](references/output-linear.md)** - Linear project with labeled issues
 - **[output-backlog-md.md](references/output-backlog-md.md)** - Backlog.md Kanban format
 
 **Default**: If no destination specified, use local markdown.
@@ -56,7 +56,7 @@ Phase (higher level)
     └── Task 3: Description + micro acceptance
 ```
 
-**Phase**: Independently testable milestone. Has acceptance criteria.
+**Phase**: Independently testable unit. Has acceptance criteria.
 **Task**: Single TDD cycle. One task = one test = one commit.
 
 ## Plan Contents

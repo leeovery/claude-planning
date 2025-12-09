@@ -8,7 +8,7 @@
 
 Plans live in `docs/specs/plans/{topic}/` with phases and tasks.
 
-**Phase** = milestone with acceptance criteria
+**Phase** = grouping with acceptance criteria
 **Task** = single TDD cycle = one commit
 
 ## Before Starting

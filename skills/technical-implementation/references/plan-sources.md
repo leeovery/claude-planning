@@ -32,9 +32,9 @@ For full format details, see the planning skill's output adapters:
 ### Linear
 
 1. Extract `project_id` from frontmatter
-2. Query Linear MCP for project milestones (phases)
-3. Query Linear MCP for issues within each milestone (tasks)
-4. Process in milestone order
+2. Query Linear MCP for project issues
+3. Filter issues by phase label (e.g., `phase-1`, `phase-2`)
+4. Process in phase order
 
 **Fallback**: If Linear MCP is unavailable, inform user and suggest checking MCP configuration.
 

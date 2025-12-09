@@ -16,7 +16,7 @@ Use this output format when you want **Linear as the source of truth** for plan 
 | Planning Concept | Linear Entity |
 |------------------|---------------|
 | Plan | Project |
-| Phase | Milestone |
+| Phase | Label (e.g., `phase-1`, `phase-2`) |
 | Task | Issue |
 
 ## Output Process
@@ -29,28 +29,30 @@ Via MCP, create a project with:
 - **Description**: Brief summary + link to discussion file
 - **Team**: As specified by user
 
-### 2. Create Milestones for Phases
+### 2. Create Labels for Phases
 
-For each phase, create a milestone:
+Create labels to denote phases (if they don't already exist):
 
-- **Name**: `Phase {N}: {Phase Name}`
-- **Description**: Phase goal + acceptance criteria
+- `phase-1`
+- `phase-2`
+- etc.
 
-Example:
+Document the phase goals and acceptance criteria in a pinned issue or the project description:
+
 ```
-Name: Phase 1: Core Authentication
-Description:
+Phase 1: Core Authentication
 Goal: Implement basic login/logout flow
-
 Acceptance:
 - [ ] User can log in with email/password
 - [ ] Session persists across page refresh
 - [ ] Logout clears session
+
+Phase 2: ...
 ```
 
 ### 3. Create Issues for Tasks
 
-For each task, create an issue within the appropriate milestone:
+For each task, create an issue and apply the appropriate phase label:
 
 **Title**: Clear action statement
 
@@ -74,10 +76,12 @@ Discussion: `docs/specs/discussions/{topic-name}/discussion.md`
 [Optional: link to specific decision if relevant]
 ```
 
-**Labels** (optional):
-- `edge-case` - for edge case handling tasks
-- `foundation` - for setup/infrastructure tasks
-- `refactor` - for cleanup tasks
+**Labels**:
+- **Required**: `phase-1`, `phase-2`, etc. - denotes which phase the task belongs to
+- **Optional**:
+  - `edge-case` - for edge case handling tasks
+  - `foundation` - for setup/infrastructure tasks
+  - `refactor` - for cleanup tasks
 
 ### 4. Create Local Plan File
 
@@ -106,8 +110,8 @@ This plan is managed in Linear. The source of truth for tasks and progress is th
 
 **Implementation will**:
 1. Read this file to find the Linear project
-2. Query Linear for current milestones and issues
-3. Work through tasks in milestone order
+2. Query Linear for project issues
+3. Work through tasks in phase order (by label)
 4. Update issue status as tasks complete
 
 **To add tasks**: Create issues in the Linear project. They'll be picked up automatically.
@@ -168,11 +172,9 @@ docs/specs/
 
 Linear:
 └── Project: {topic-name}
-    ├── Milestone: Phase 1
-    │   ├── Issue: Task 1
-    │   └── Issue: Task 2
-    └── Milestone: Phase 2
-        └── Issue: Task 3
+    ├── Issue: Task 1 [label: phase-1]
+    ├── Issue: Task 2 [label: phase-1]
+    └── Issue: Task 3 [label: phase-2]
 ```
 
 Implementation will read `plan.md`, see `format: linear`, and query Linear via MCP.
@@ -188,11 +190,10 @@ If Linear MCP is unavailable during implementation:
 
 Planning uses these Linear MCP capabilities:
 - Create project
-- Create milestone
 - Create issue
-- Assign issue to milestone
+- Create/assign labels
 
 Implementation uses:
 - Query project issues
-- Query milestones
+- Filter issues by label
 - Update issue status

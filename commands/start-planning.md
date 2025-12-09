@@ -47,9 +47,10 @@ Ask: **Where should this plan live?**
    - Best for: Small features, solo work, quick iterations
    - Everything in one version-controlled file
 
-2. **Linear** - Project with milestones and issues (requires MCP)
+2. **Linear** - Project with labeled issues (requires MCP)
    - Best for: Team collaboration, visual tracking, larger features
    - Update tasks directly in Linear's UI
+   - Phases denoted via labels (e.g., `phase-1`, `phase-2`)
    - Requires: Linear MCP server configured
 
 3. **Backlog.md** - Task files in `backlog/` directory with Kanban UI
