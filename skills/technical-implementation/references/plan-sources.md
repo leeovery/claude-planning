@@ -1,0 +1,74 @@
+# Plan Sources
+
+*Reference for **[technical-implementation](../SKILL.md)***
+
+---
+
+Plans are always stored in `docs/specs/plans/{topic}/plan.md`. The file's frontmatter declares the format.
+
+## Detecting Plan Format
+
+Always read `plan.md` first and check the `format` field in frontmatter:
+
+| Format | Meaning | How to Proceed |
+|--------|---------|----------------|
+| `local-markdown` | Full plan is in this file | Read content directly |
+| `linear` | Plan managed in Linear | Query Linear via MCP |
+| `backlog-md` | Tasks in Backlog.md | Query via MCP or read `backlog/` |
+
+For full format details, see the planning skill's output adapters:
+- [output-local-markdown.md](../../technical-planning/references/output-local-markdown.md)
+- [output-linear.md](../../technical-planning/references/output-linear.md)
+- [output-backlog-md.md](../../technical-planning/references/output-backlog-md.md)
+
+## Reading Plans
+
+### Local Markdown
+
+1. Read `plan.md` - all content is inline
+2. Phases and tasks are in the document
+3. Follow phase order as written
+
+### Linear
+
+1. Extract `project_id` from frontmatter
+2. Query Linear MCP for project milestones (phases)
+3. Query Linear MCP for issues within each milestone (tasks)
+4. Process in milestone order
+
+**Fallback**: If Linear MCP is unavailable, inform user and suggest checking MCP configuration.
+
+### Backlog.md
+
+1. If Backlog.md MCP is available, query tasks via MCP
+2. Otherwise, read task files from `backlog/` directory
+3. Filter tasks by label (e.g., `phase-1`) or naming convention
+4. Process in priority order (high → medium → low)
+
+**Fallback**: Can read `backlog/` files directly if MCP unavailable.
+
+## Updating Progress
+
+### Local Markdown
+- Check off acceptance criteria in the plan file
+- Update phase status as phases complete
+
+### Linear
+- Update issue status in Linear via MCP after each task
+- User sees real-time progress in Linear UI
+
+### Backlog.md
+- Update task status to "In Progress" when starting
+- Check off acceptance criteria items in task file
+- Update status to "Done" when complete
+- Backlog.md CLI auto-moves to completed folder
+
+## Execution Workflow
+
+Regardless of format, execute the same TDD workflow:
+1. Derive test from micro acceptance
+2. Write failing test
+3. Implement to pass
+4. Commit
+5. Update progress
+6. Repeat
