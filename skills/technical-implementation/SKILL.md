@@ -34,7 +34,7 @@ You're at step 3. Execute the plan. Don't re-debate decisions.
    - Check the `format` field in frontmatter:
      - `local-markdown` → content is in this file
      - `linear` → query Linear via MCP using frontmatter project_id
-     - `tasks-md` → read task files from subdirectories
+     - `backlog-md` → query Backlog.md via MCP or read `backlog/` directory
 
    See **[plan-sources.md](references/plan-sources.md)** for details on each format.
 
@@ -158,7 +158,7 @@ Task: Phase 2, Task 1
 
 ## References
 
-- **[plan-sources.md](references/plan-sources.md)** - Reading plans from different formats (markdown, Linear, Tasks.md)
+- **[plan-sources.md](references/plan-sources.md)** - Reading plans from different formats (markdown, Linear, Backlog.md)
 - **[plan-execution.md](references/plan-execution.md)** - Following plans, phase verification, hierarchy
 - **[tdd-workflow.md](references/tdd-workflow.md)** - TDD cycle, test derivation, when tests can change
 - **[code-quality.md](references/code-quality.md)** - DRY, SOLID, complexity, YAGNI

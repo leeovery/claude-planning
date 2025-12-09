@@ -14,10 +14,8 @@ Scan the codebase for discussions and plans:
    - Note each topic name
    - Check status (Concluded | Deciding | Exploring)
 
-2. **Find existing plans**: Look in `docs/specs/plans/*/`
-   - Check for `plan.md` (local markdown)
-   - Check for `linear.md` (Linear integration)
-   - Check for `_overview.md` (Tasks.md format)
+2. **Find existing plans**: Look in `docs/specs/plans/*/plan.md`
+   - Check `format` frontmatter: `local-markdown`, `linear`, or `backlog-md`
 
 3. **Identify gaps**: Discussions without corresponding plans
 
@@ -54,12 +52,12 @@ Ask: **Where should this plan live?**
    - Update tasks directly in Linear's UI
    - Requires: Linear MCP server configured
 
-3. **Tasks.md** - Directory of task files for Kanban board
-   - Best for: Visual tracking without external services
-   - Works with Tasks.md UI or Obsidian
-   - Files stay local and version-controlled
+3. **Backlog.md** - Task files in `backlog/` directory with Kanban UI
+   - Best for: Local visual tracking with AI/MCP support
+   - Terminal and web Kanban views
+   - Git-native with auto-commit support
 
-**If Linear is selected**: Check if Linear MCP is available. If not, inform the user and suggest alternatives.
+**If Linear or Backlog.md selected**: Check if MCP is available. If not, inform the user and suggest alternatives.
 
 ## Step 4: Gather Additional Context
 
@@ -74,7 +72,7 @@ Ask: **Where should this plan live?**
 
 Pass to the technical-planning skill:
 - Discussion path: `docs/specs/discussions/{topic-name}/`
-- Output destination: (local-markdown | linear | tasks-md)
+- Output destination: (local-markdown | linear | backlog-md)
 - Additional context gathered
 
 Example handoff:
@@ -92,7 +90,7 @@ The skill will:
 1. Read the discussion document
 2. Create phases and tasks
 3. Output in the specified format
-4. Create appropriate files (plan.md, linear.md, or task directory)
+4. Create `plan.md` with appropriate frontmatter format
 
 ## Notes
 

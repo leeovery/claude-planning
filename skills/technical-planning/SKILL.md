@@ -17,12 +17,12 @@ Plans can be stored in different formats depending on user preference. You will 
 |-------------|----------|--------|
 | **Local Markdown** | Simple features, solo work | Single `plan.md` file |
 | **Linear** | Team collaboration, visual tracking | Linear project + local pointer |
-| **Tasks.md** | Local Kanban board, visual + versioned | Directory of task files |
+| **Backlog.md** | Local Kanban with MCP support | Task files in `backlog/` |
 
 Reference the appropriate adapter for output format:
 - **[output-local-markdown.md](references/output-local-markdown.md)** - Single plan.md file
 - **[output-linear.md](references/output-linear.md)** - Linear project with milestones/issues
-- **[output-tasks-md.md](references/output-tasks-md.md)** - Directory structure for Tasks.md
+- **[output-backlog-md.md](references/output-backlog-md.md)** - Backlog.md Kanban format
 
 **Default**: If no destination specified, use local markdown.
 
@@ -104,7 +104,7 @@ Implementation will:
 **Output adapters** (use based on chosen destination):
 - **[output-local-markdown.md](references/output-local-markdown.md)** - Single plan.md file
 - **[output-linear.md](references/output-linear.md)** - Linear project integration
-- **[output-tasks-md.md](references/output-tasks-md.md)** - Tasks.md Kanban format
+- **[output-backlog-md.md](references/output-backlog-md.md)** - Backlog.md Kanban format
 
 ## Remember
 

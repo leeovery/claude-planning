@@ -12,7 +12,7 @@ Always read `plan.md` first and check the `format` field in frontmatter:
 
 ```yaml
 ---
-format: local-markdown | linear | tasks-md
+format: local-markdown | linear | backlog-md
 ---
 ```
 
@@ -20,7 +20,7 @@ format: local-markdown | linear | tasks-md
 |--------|---------|----------------|
 | `local-markdown` | Full plan is in this file | Read content directly |
 | `linear` | Plan managed in Linear | Query Linear via MCP |
-| `tasks-md` | Tasks in subdirectories | Read directory structure |
+| `backlog-md` | Tasks in Backlog.md | Query via MCP or read `backlog/` |
 
 ## Local Markdown (`format: local-markdown`)
 
@@ -79,53 +79,66 @@ If Linear MCP is unavailable:
 - Cannot proceed without MCP access
 - Suggest checking MCP configuration
 
-## Tasks.md (`format: tasks-md`)
+## Backlog.md (`format: backlog-md`)
 
 **Frontmatter**:
 ```yaml
 ---
-format: tasks-md
+format: backlog-md
+project: TOPIC_NAME
 ---
 ```
 
 **Reading**:
-1. Read `plan.md` for overview context
-2. List phase directories (numbered: `1-{name}/`, `2-{name}/`)
-3. For each phase, read task files in order (`01-{task}.md`, `02-{task}.md`)
+1. If Backlog.md MCP is available, query tasks via MCP
+2. Otherwise, read task files from `backlog/` directory
+3. Filter tasks by label (e.g., `phase-1`) or naming convention
+4. Process in priority order (high → medium → low)
 
 **Structure**:
 ```
-docs/specs/plans/{topic}/
-├── plan.md                   # format: tasks-md (overview)
-├── 1-{phase-name}/           # Phase 1
-│   ├── 01-{task}.md          # Task 1
-│   └── 02-{task}.md          # Task 2
-├── 2-{phase-name}/           # Phase 2
-│   └── 01-{task}.md          # Task 1
-└── done/                     # Completed tasks
+backlog/
+├── task-1 - [P1] Configure auth.md
+├── task-2 - [P1] Add login endpoint.md
+├── task-3 - [P2] Session management.md
+└── completed/                        # Done tasks
 ```
 
 **Task file contains**:
 ```markdown
-## Goal
-{What to accomplish}
+---
+status: To Do
+priority: high
+labels: [phase-1, api]
+---
 
-## Implementation
+# Task Title
+
+{Description}
+
+## Plan
 {What to do}
 
-## Tests
-- `it does expected behavior`
+## Acceptance Criteria
+1. [ ] Test written: `it does expected behavior`
+2. [ ] Implementation complete
+3. [ ] Tests passing
+4. [ ] Committed
 
-## Acceptance
-- [ ] Test written and failing
-- [ ] Implementation complete
-- [ ] Test passing
-- [ ] Committed
+## Notes
+- Discussion: docs/specs/discussions/{topic}/discussion.md
 ```
 
 **Updating Progress**:
-- Check off acceptance items in task file
-- Optionally move completed task files to `done/` directory
+- Update task status to "In Progress" when starting
+- Check off acceptance criteria items
+- Update status to "Done" when complete
+- Backlog.md auto-moves to completed folder via CLI
+
+**MCP Tools** (if available):
+- Query tasks by status/label
+- Update task status
+- Add notes to tasks
 
 ## Common Patterns
 

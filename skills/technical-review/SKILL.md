@@ -26,7 +26,7 @@ You're at step 4. The code exists. Your job is validation.
    - Any deviations from agreed approach?
 
 2. **Plan** (`docs/specs/plans/{topic}/plan.md`)
-   - Check `format` frontmatter to determine source (local-markdown, linear, tasks-md)
+   - Check `format` frontmatter to determine source (local-markdown, linear, backlog-md)
    - Were all phase acceptance criteria actually met?
    - Were all tasks completed?
    - Any scope creep or missing scope?
@@ -47,7 +47,7 @@ You're at step 4. The code exists. Your job is validation.
 2. **Read the plan** (`plan.md`) - Check `format` frontmatter:
    - `local-markdown` → content is in this file
    - `linear` → query Linear via MCP for project issues
-   - `tasks-md` → read task files from subdirectories
+   - `backlog-md` → query Backlog.md via MCP or read `backlog/`
 3. **Read the implementation** - Code changes and tests
 4. **Check project skills** - Framework/language conventions
 5. **Produce review** - Structured feedback
