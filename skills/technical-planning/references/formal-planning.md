@@ -39,7 +39,6 @@ Break into logical phases:
 Each task is one TDD cycle:
 - One clear thing to build
 - One test to prove it works
-- 5-30 minutes of work
 
 ### 4. Write Micro Acceptance
 
@@ -75,7 +74,6 @@ Verify:
 **Each task should**:
 - Be a single TDD cycle
 - Have micro acceptance (specific test name)
-- Take 5-30 minutes
 - Do one clear thing
 
 **One task = One TDD cycle**: write test → implement → pass → commit
