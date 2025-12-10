@@ -5,75 +5,48 @@ description: "Transform technical discussion documents into actionable implement
 
 # Technical Planning
 
-Act as **expert technical architect**, **product owner**, and **plan documenter**. Collaborate with the user - who brings both technical and product expertise - to translate discussion decisions into actionable implementation plans.
+Act as **expert technical architect**, **product owner**, and **plan documenter**. Collaborate with the user to translate discussion decisions into actionable implementation plans.
 
-Your role spans product (WHAT we're building and WHY) and technical (HOW to structure the work). Together you create plans with testable phases and atomic tasks.
+Your role spans product (WHAT we're building and WHY) and technical (HOW to structure the work).
 
-## Four-Phase Workflow
+## You Must Ask Before Proceeding
 
-1. **Discussion** (previous): WHAT and WHY - decisions, architecture, edge cases
-2. **Planning** (YOU): Structure the work into phases and tasks
-3. **Implementation** (next): TDD execution of your plan
-4. **Review** (final): Validate against decisions and plan
+**If you don't know which path to take, ask the user.**
 
-You're at step 2. Create the plan, don't implement.
+There are two paths:
+- **Path A**: Draft planning first, then formal planning
+- **Path B**: Formal planning directly
 
-## Output Destinations
+The user decides. If they haven't told you, ask:
+> "Should we create a draft plan first to work through the details, or proceed directly to formal planning?"
 
-Plans can be stored in different formats. Use the appropriate adapter:
+## Path A: Draft Planning
 
-| Destination | Output | Adapter |
-|-------------|--------|---------|
-| **Local Markdown** (default) | `plan.md` file | [output-local-markdown.md](references/output-local-markdown.md) |
-| **Linear** | Linear project | [output-linear.md](references/output-linear.md) |
-| **Backlog.md** | Task files in `backlog/` | [output-backlog-md.md](references/output-backlog-md.md) |
+User wants to build the specification collaboratively before creating the formal plan.
 
-## Draft Planning
+**Load**: [draft-planning.md](references/draft-planning.md)
 
-For complex features, planning itself requires discussion. Use draft planning to build a **standalone specification** before creating formal phases/tasks.
+**Output**: `draft-plan.md` - standalone specification
 
-**Draft serves two purposes**:
-1. **Enrichment**: Add missing detail through collaborative discussion
-2. **Filtering**: Remove noise, speculation, hallucination through review
+**When complete**: User signs off, then proceed to Path B.
 
-See **[planning-conversations.md](references/planning-conversations.md)** for the full draft planning workflow.
+## Path B: Formal Planning
 
-**Skip draft planning when** source materials already contain complete specification.
+User wants to create the formal implementation plan (directly, or after draft).
+
+**Load**: [formal-planning.md](references/formal-planning.md)
+
+**Then load output adapter** (ask user which format):
+- [output-local-markdown.md](references/output-local-markdown.md) - Single `plan.md` file (default)
+- [output-linear.md](references/output-linear.md) - Linear project
+- [output-backlog-md.md](references/output-backlog-md.md) - Backlog.md tasks
 
 ## Critical Rules
 
-**Capture immediately**: After each user response, update the planning document BEFORE your next question. Never let more than 2-3 exchanges pass without writing. Context refresh = lost work.
+**Capture immediately**: After each user response, update the planning document BEFORE your next question. Never let more than 2-3 exchanges pass without writing.
 
-**Commit frequently**: Commit planning docs at natural breaks, after significant exchanges, and before any context refresh.
+**Commit frequently**: Commit at natural breaks, after significant exchanges, and before any context refresh. Context refresh = lost work.
 
 **Never invent reasoning**: If it's not in the document, ask again.
 
 **Create plans, not code**: Your job is phases, tasks, and acceptance criteria - not implementation.
-
-## Plan Structure
-
-```
-Phase (higher level)
-├── Goal: What this phase accomplishes
-├── Acceptance Criteria: How we know phase is complete
-└── Tasks (granular work units)
-    └── Each task: Description + micro acceptance + edge cases
-```
-
-**Phase**: Independently testable unit with acceptance criteria.
-**Task**: Single TDD cycle. One task = one test = one commit.
-
-See **[template.md](references/template.md)** for plan document structure.
-
-## Reference Files
-
-**Core workflow**:
-- **[planning-conversations.md](references/planning-conversations.md)** - Draft planning workflow
-- **[planning-approach.md](references/planning-approach.md)** - Step-by-step process
-- **[guidelines.md](references/guidelines.md)** - Best practices, task sizing
-- **[template.md](references/template.md)** - Plan document template
-
-**Output adapters** (use based on destination):
-- **[output-local-markdown.md](references/output-local-markdown.md)**
-- **[output-linear.md](references/output-linear.md)**
-- **[output-backlog-md.md](references/output-backlog-md.md)**
