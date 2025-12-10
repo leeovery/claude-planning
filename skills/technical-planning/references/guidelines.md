@@ -28,11 +28,9 @@ The draft process is collaborative - together with the user, you figure out how 
 - HOW to approach it (varies by feature complexity and team familiarity)
 - Specific patterns or constraints
 
-**Bad**: "Add caching to improve performance"
-- Too vague. What endpoints? What's the goal? What edge cases?
+**Example**: "Add caching to /api/products to reduce DB load. Target 80% fewer queries. Handle: empty results, large responses, Redis failures. Implementation can determine TTLs and key strategy."
 
-**Good**: "Add caching to /api/products to reduce DB load. Target 80% fewer queries. Handle: empty results, large responses, Redis failures. Implementation can determine TTLs and key strategy."
-- Clear WHAT and WHY. Edge cases identified. HOW left to implementation where appropriate.
+This example shows clear WHAT and WHY, identifies edge cases, and leaves HOW to implementation where appropriate.
 
 This balance comes from **draft planning** - collaborative discussion that finds the right level of detail before formal phases/tasks are created.
 
@@ -52,9 +50,7 @@ You have summaries, not nuance. The planning documents ARE the nuance.
 
 **If draft/plan documents exist**: Read them. Trust them. They have reasoning you've lost.
 
-**If no documents exist**: You've lost the planning conversation. Be honest. Don't pretend you remember details you don't have.
-
-**Never invent reasoning** that wasn't captured. If it's not in the document, ask again.
+**If no documents exist**: You've lost the planning conversation. Be honest about that and ask again for what you need.
 
 ### Immediate Capture
 
@@ -88,7 +84,7 @@ You have summaries, not nuance. The planning documents ARE the nuance.
 - Take 5-30 minutes
 - Do one clear thing
 
-**Bad tasks**: "Implement caching layer" (too big), "Handle errors" (too vague)
+**Example good tasks**: "Add cache check before DB query in ProductController::index", "Return cached response when Redis hit occurs", "Log cache miss and fetch from database"
 
 ## Micro Acceptance
 

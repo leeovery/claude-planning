@@ -44,9 +44,7 @@ At the end of draft planning, `draft-plan.md` must be a **standalone file** cont
 - Optionally, guidance on HOW to approach it (when helpful, not prescriptive)
 - Only validated information, not summaries or assumptions
 
-**Anti-pattern**: A draft that summarizes the discussion into three bullet points is useless. That's just another file with vague content that requires re-discovery.
-
-**Correct pattern**: A draft that defines the feature clearly - what it does, why it exists, what edge cases matter, how we'll know it's complete. Implementation can then take charge or collaborate to figure out the approach.
+A good draft defines the feature clearly - what it does, why it exists, what edge cases matter, how we'll know it's complete. Implementation can then take charge or collaborate to figure out the approach.
 
 ## Two-Phase Planning
 
@@ -97,11 +95,11 @@ This is non-negotiable. Context windows refresh without warning. Three hours of 
 
 ### What to Capture
 
-Record **what the user said AND why**, not just conclusions:
+Record **what the user said AND why**, not just conclusions.
 
-**Bad**: "Phase 1 will handle authentication"
+**Example**: "User wants auth first because: (1) everything depends on knowing who the user is, (2) can't test other features without login working, (3) existing auth is partially broken and blocking current work"
 
-**Good**: "User wants auth first because: (1) everything depends on knowing who the user is, (2) can't test other features without login working, (3) existing auth is partially broken and blocking current work"
+Capture the reasoning, not just the decision.
 
 ### Capture the Reasoning Journey
 
@@ -236,21 +234,7 @@ The right level of detail varies. Some features need detailed HOW guidance; othe
 
 **The Specification is standalone** - formal planning should not require going back to source discussion documents. Everything needed is in the draft.
 
-## Good Draft vs Bad Draft
-
-**Bad Draft** (creates no value):
-```markdown
-## What We're Building
-A caching layer for the API.
-
-## Scope
-- Add caching
-- Handle invalidation
-```
-
-This is useless. It says nothing concrete. What endpoints? What's the goal? What edge cases matter? How do we know it's working?
-
-**Good Draft** (enables formal planning):
+## Example: A Complete Draft Specification
 ```markdown
 ## What We're Building
 Response caching for the /api/products endpoints to reduce database load
@@ -297,18 +281,14 @@ Testing ideas:
 - Test Redis failure handling
 ```
 
-The good draft is clear about WHAT and WHY, identifies the edge cases, and gives implementation enough context to make good decisions. It includes approach guidance without being overly prescriptive.
+This draft is clear about WHAT and WHY, identifies the edge cases, and gives implementation enough context to make good decisions. It includes approach guidance without being overly prescriptive.
 
-## Anti-Hallucination
+## Building Through Collaboration
 
-During draft planning, you are **building** the specification through discussion. Do not invent details - ask.
+During draft planning, you are **building** the specification through discussion. When information is missing, ask.
 
-**Do**: "The discussion mentions caching but doesn't specify TTLs. What cache duration makes sense for your use case?"
-
-**Don't**: Assume TTLs, cache keys, or strategies that weren't discussed.
+**Example**: "The discussion mentions caching but doesn't specify TTLs. What cache duration makes sense for your use case?"
 
 After context refresh:
 - **If the draft exists**: Read it. Trust it. The Specification section has the detail you've lost.
-- **If no draft exists**: You've lost the planning conversation. Be honest. Don't pretend you remember details you don't have.
-
-**Never invent reasoning or detail** that wasn't captured. If it's not in the document, ask again.
+- **If no draft exists**: You've lost the planning conversation. Be honest about that and ask again for what you need.
