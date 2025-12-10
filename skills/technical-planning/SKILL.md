@@ -37,24 +37,34 @@ The planning *approach* is the same regardless of destination. Only the output f
 
 You're at step 2. Don't implement.
 
-## Draft Planning for Complex Features
+## Draft Planning: Building the Specification
 
-For complex or deeply technical work, planning itself requires discussion. Figuring out phases and tasks IS a conversation that needs capturing.
+Draft planning produces a **standalone specification** - a document containing everything needed to construct formal phases and tasks. It is NOT a summary. It is NOT conversation notes.
+
+**The draft serves two purposes**:
+
+1. **Enrichment**: Source materials may capture WHAT and WHY but not HOW. Draft planning adds missing detail through collaborative discussion (not hallucination).
+
+2. **Filtering**: Source materials may contain noise, tangents, speculation, or hallucinated content. Draft planning removes this through collaborative review.
 
 **Two-phase planning**:
-1. **Draft Planning**: Back-and-forth about structure, captured in `draft-plan.md`
-2. **Formal Planning**: Convert draft to structured `plan.md` (or Linear/Backlog.md)
+1. **Draft Planning**: Collaborate to build complete specification in `draft-plan.md`
+2. **Formal Planning**: Structure the specification into phases/tasks
 
-See **[planning-conversations.md](references/planning-conversations.md)** for the draft planning workflow.
+See **[planning-conversations.md](references/planning-conversations.md)** for the full draft planning workflow.
+
+**The draft must leave no room for interpretation**. Implementation agents should have zero creative latitude - everything needed is spelled out.
 
 **When to use draft planning**:
-- Complex features with unclear phase boundaries
-- Deeply technical work requiring back-and-forth
+- Source materials need enrichment (missing HOW details)
+- Source materials need filtering (noise, speculation, hallucination)
+- Complex features with unclear approach
 - Multiple valid ways to structure the work
 
 **Skip to formal planning when**:
-- Structure is obvious from discussion doc
-- Small feature with clear phases
+- Source materials already contain complete specification
+- Small feature with obvious structure
+- All detail already worked out elsewhere
 
 ## Capture Planning Conversations Immediately
 

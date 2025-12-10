@@ -14,6 +14,20 @@ The plan (whether Linear issues, Backlog.md tasks, or local markdown) IS the sou
 - **Reference, don't depend**: OK to link discussion docs, but if they vanish the task should still make sense
 - **No assumptions**: Don't assume implementer knows context - spell it out
 
+### No Room for Creativity
+
+Implementation agents (or humans) should have **zero creative latitude** when executing your plan. If they have to make decisions, your plan is incomplete.
+
+**Test**: Could someone execute this plan mechanically, without making judgment calls?
+
+**Bad**: "Add caching to improve performance"
+- Implementer must decide: What to cache? TTLs? Cache keys? Invalidation strategy?
+
+**Good**: "Add Redis caching to /api/products endpoint. Key format: products:{id}. TTL: 300 seconds. Invalidate on Product model save event using cache tags."
+- Implementer just executes. No decisions required.
+
+This level of detail comes from **draft planning** - collaborative discussion that builds a complete specification before formal phases/tasks are created.
+
 ### No Hallucinations
 
 If you don't know something, don't guess. If the discussion is missing information:

@@ -13,21 +13,25 @@ Bridge between discussion and implementation. Convert decisions into executable 
 
 ## Workflow
 
-### 0. Draft Planning (For Complex Features)
+### 0. Draft Planning (Building the Specification)
 
-For complex or deeply technical work, the planning conversation itself needs capturing.
+Draft planning produces a **standalone specification** containing everything needed for formal planning. This is NOT conversation notes or a summary.
+
+**The draft process**:
+1. **Enrichment**: Add missing detail through collaborative discussion (not hallucination)
+2. **Filtering**: Remove noise, speculation, and hallucinated content through collaborative review
 
 **Before jumping to formal phases and tasks**:
 1. Create `draft-plan.md` in the plans directory
-2. Discuss structure with the user
-3. Capture the conversation in real-time (see below)
-4. Once structure is agreed, proceed to formal planning
+2. Collaborate with user to build the Specification section
+3. Continue until specification is complete and unambiguous
+4. Proceed to formal planning only when draft leaves no room for interpretation
 
-**Immediate capture rule**: After each user response, update the draft document BEFORE your next question. Never let 2-3 exchanges pass without writing.
+**Immediate capture rule**: After each user response, update the draft document BEFORE your next question. Distill validated information into the Specification section immediately.
 
 See **[planning-conversations.md](planning-conversations.md)** for full draft planning workflow.
 
-**Skip draft planning when**: Structure is obvious, small feature, user knows exactly what they want.
+**Skip draft planning when**: Source materials already contain complete specification with all detail needed for implementation.
 
 ### 1. Read Discussion Document
 
