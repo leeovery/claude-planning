@@ -27,7 +27,7 @@ Draft planning produces a **standalone specification** containing everything nee
 3. Continue until WHAT/WHY/edge cases/acceptance criteria are clear
 4. Proceed to formal planning when the draft has the right level of detail for this feature
 
-**Immediate capture rule**: After each user response, update the draft document BEFORE your next question. Distill validated information into the Specification section immediately.
+**Immediate capture rule**: After each user response, update the draft document BEFORE your next question. Distill validated information into the Specification section immediately. Never let more than 2-3 exchanges pass without writing.
 
 See **[planning-conversations.md](planning-conversations.md)** for full draft planning workflow.
 
