@@ -25,12 +25,8 @@ The draft process is collaborative - together with the user, you figure out how 
 - Testing ideas and acceptance criteria
 
 **Include when helpful**:
-- HOW to approach it (varies by feature complexity and team familiarity)
+- HOW to approach it (varies by feature complexity)
 - Specific patterns or constraints
-
-**Example**: "Add caching to /api/products to reduce DB load. Target 80% fewer queries. Handle: empty results, large responses, Redis failures. Implementation can determine TTLs and key strategy."
-
-This example shows clear WHAT and WHY, identifies edge cases, and leaves HOW to implementation where appropriate.
 
 This balance comes from **draft planning** - collaborative discussion that finds the right level of detail before formal phases/tasks are created.
 
@@ -83,8 +79,6 @@ You have summaries, not nuance. The planning documents ARE the nuance.
 - Have micro acceptance (specific test name)
 - Take 5-30 minutes
 - Do one clear thing
-
-**Example good tasks**: "Add cache check before DB query in ProductController::index", "Return cached response when Redis hit occurs", "Log cache miss and fetch from database"
 
 ## Micro Acceptance
 

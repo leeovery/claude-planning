@@ -95,11 +95,7 @@ This is non-negotiable. Context windows refresh without warning. Three hours of 
 
 ### What to Capture
 
-Record **what the user said AND why**, not just conclusions.
-
-**Example**: "User wants auth first because: (1) everything depends on knowing who the user is, (2) can't test other features without login working, (3) existing auth is partially broken and blocking current work"
-
-Capture the reasoning, not just the decision.
+Record **what the user said AND why**, not just conclusions. Capture the reasoning, not just the decision.
 
 ### Capture the Reasoning Journey
 
@@ -234,60 +230,9 @@ The right level of detail varies. Some features need detailed HOW guidance; othe
 
 **The Specification is standalone** - formal planning should not require going back to source discussion documents. Everything needed is in the draft.
 
-## Example: A Complete Draft Specification
-```markdown
-## What We're Building
-Response caching for the /api/products endpoints to reduce database load
-for repeated identical requests. Target: 80% reduction in DB hits for
-product listing pages.
-
-## Why We're Building It
-Product pages are our highest-traffic endpoints. Currently every request
-hits the database, even for identical queries seconds apart. Users see
-slow page loads during peak traffic.
-
-## Scope Boundaries
-**In scope**:
-- GET /api/products (list with filters)
-- GET /api/products/{id} (single product)
-
-**Out of scope**:
-- POST/PUT/DELETE endpoints (no caching needed)
-- User-specific data (cart, wishlist) - different caching strategy later
-- CDN integration - separate initiative
-
-## Approach
-Use Redis via Laravel's Cache facade. Consider caching at controller level
-for simplicity, but implementation can propose alternatives.
-
-Key considerations:
-- Need to handle cache invalidation when products are updated
-- TTLs should balance freshness with cache hit rate
-
-## Edge Cases to Handle
-- Empty result sets (should we cache "no results"?)
-- Very large responses (>1MB)
-- Redis unavailable (fail open vs fail closed?)
-
-## Testing and Acceptance
-How we'll know it's complete:
-- Product list pages respond from cache on repeat requests
-- Cache invalidates when product data changes
-- No user-facing errors when Redis is unavailable
-
-Testing ideas:
-- Load test showing DB query reduction
-- Test cache invalidation on product update
-- Test Redis failure handling
-```
-
-This draft is clear about WHAT and WHY, identifies the edge cases, and gives implementation enough context to make good decisions. It includes approach guidance without being overly prescriptive.
-
 ## Building Through Collaboration
 
 During draft planning, you are **building** the specification through discussion. When information is missing, ask.
-
-**Example**: "The discussion mentions caching but doesn't specify TTLs. What cache duration makes sense for your use case?"
 
 After context refresh:
 - **If the draft exists**: Read it. Trust it. The Specification section has the detail you've lost.
