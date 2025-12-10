@@ -48,6 +48,8 @@ You have summaries, not nuance. The planning documents ARE the nuance.
 
 **If no documents exist**: You've lost the planning conversation. Be honest about that and ask again for what you need.
 
+**Never invent reasoning** that wasn't captured. If it's not in the document, ask again.
+
 ### Immediate Capture
 
 > After each user response, IMMEDIATELY update the planning document before asking your next question.
