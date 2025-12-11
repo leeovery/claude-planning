@@ -16,6 +16,8 @@ Draft planning is a **two-way process**:
 
 The draft plan is an **interim document** - a workspace for collecting validated, refined content that will feed formal planning.
 
+**The draft plan must be standalone.** It should contain everything formal planning needs - no references back to discussions or other source material. When complete, it draws a line: formal planning uses only this document.
+
 ## Source Materials
 
 Before starting any topic, review ALL available reference material:
@@ -46,9 +48,10 @@ Work through the content together:
 - Validate what's accurate
 - Remove what's wrong, outdated, or hallucinated
 - Add what's missing through brief discussion
+- **Course correct** based on knowledge from subsequent project work
 - Refine wording and structure
 
-This is a **human-level conversation**, not form-filling.
+This is a **human-level conversation**, not form-filling. The user brings context from across the project that may not be in the reference material - decisions from other topics, implications from later work, or knowledge that can't all fit in context.
 
 ### 4. Log When Approved
 Only when the user approves ("yes, log it", "that's good", etc.) do you write it to the draft plan - **verbatim** as presented and approved.
