@@ -11,10 +11,12 @@ Before beginning, discover existing work and gather necessary information.
 Scan the codebase for discussions and plans:
 
 1. **Find discussions**: Look in `docs/specs/discussions/*/discussion.md`
+   - Use ls command to list (ls `docs/specs/discussions/`)
    - Note each topic name
    - Check status (Concluded | Deciding | Exploring)
 
 2. **Find existing plans**: Look in `docs/specs/plans/*/plan.md`
+   - Use ls command to list (ls `docs/specs/plans/`)
    - Check `format` frontmatter: `local-markdown`, `linear`, or `backlog-md`
 
 3. **Identify gaps**: Discussions without corresponding plans
