@@ -4,143 +4,106 @@
 
 ---
 
-You are creating a draft plan. The user has directed you here because the source materials need enrichment or filtering before formal planning can begin.
+You are creating a draft plan - a collaborative workspace where you and the user refine reference material into a validated specification.
 
 ## Purpose
 
-Draft planning produces a **standalone specification** - everything needed to construct formal phases and tasks. It is NOT a summary. It is NOT conversation notes.
+Draft planning is a **two-way process**:
 
-**Two purposes**:
+1. **Filter**: Reference material may contain hallucinations, inaccuracies, or outdated concepts. Validate before including.
 
-1. **Enrichment**: Source materials capture WHAT and WHY but need more detail on HOW, constraints, edge cases. Add this through collaborative discussion.
+2. **Enrich**: Reference material may have gaps. Fill them through discussion.
 
-2. **Filtering**: Source materials contain noise, tangents, speculation, or hallucinated content. Remove this through collaborative review.
+The draft plan is an **interim document** - a workspace for collecting validated, refined content that will feed formal planning.
 
-Most drafts involve both.
+## Source Materials
 
-## Output
+Before starting any topic, review ALL available reference material:
+- Discussion documents (from technical-discussion phase)
+- Any existing partial plans
+- Related documentation
+
+**Treat all source material as untrusted input.** Even discussion documents that went through a collaborative process may contain issues. Your job is to synthesize and present - the user validates.
+
+## The Workflow
+
+Work through the specification **topic by topic**:
+
+### 1. Review
+Read all reference material for the current topic. Understand what exists.
+
+### 2. Synthesize and Present
+Present your understanding to the user **in the format it would appear in the plan**:
+
+> "Here's what I understand about [topic] based on the reference material. This is how I'd write it into the specification:
+>
+> [content as it would appear]
+>
+> Does this capture it? Anything to adjust, remove, or add?"
+
+### 3. Discuss and Refine
+Work through the content together:
+- Validate what's accurate
+- Remove what's wrong, outdated, or hallucinated
+- Add what's missing through brief discussion
+- Refine wording and structure
+
+This is a **human-level conversation**, not form-filling.
+
+### 4. Log When Approved
+Only when the user approves ("yes, log it", "that's good", etc.) do you write it to the draft plan - **verbatim** as presented and approved.
+
+### 5. Repeat
+Move to the next topic.
+
+## The Draft Document
 
 Create `draft-plan.md` in `docs/specs/plans/{topic-name}/`
 
-## Critical Rules
+Structure is **flexible** - organize around phases and subject matter, not rigid sections. This is a working document.
 
-**Capture immediately**: After each user response, update the draft document BEFORE your next question. Never let more than 2-3 exchanges pass without writing.
-
-**Commit frequently**: Commit at natural breaks, after significant exchanges, and before any context refresh. Context refresh = lost work.
-
-**Never invent reasoning**: If it's not in the document, ask again.
-
-## Draft Document Format
-
-The draft has two sections: **Planning Log** (running capture) and **Specification** (the deliverable).
+Suggested skeleton:
 
 ```markdown
 # Draft Plan: [Topic Name]
 
 **Status**: Draft - building specification
-**Created**: [date]
 **Last Updated**: [timestamp]
 
 ---
 
 ## Specification
 
-This section is the deliverable. Update it continuously as clarity emerges.
-
-### What We're Building
-
-[Specific, concrete description. What does it do? What problem does it solve?]
-
-### Why We're Building It
-
-[The motivation. What need does this address?]
-
-### Approach (Optional)
-
-[Include when there's a specific approach to follow. Leave light when implementation should figure it out.]
-
-### Scope Boundaries
-
-**In scope**:
-- [Specific item]
-
-**Out of scope**:
-- [Item and why excluded]
-
-### Technical Decisions
-
-| Decision | Choice | Reasoning |
-|----------|--------|-----------|
-| [decision point] | [what we chose] | [why] |
-
-### Edge Cases to Handle
-
-- [Edge case that implementation must handle]
-
-### Constraints
-
-- [Technical or business constraint]
-
-### Testing and Acceptance
-
-How we'll know this is complete:
-- [Acceptance criterion]
-
-Testing ideas:
-- [Test scenario]
-
-### Open Questions (Blocking)
-
-- [ ] [Question that MUST be answered before formal planning]
+[Validated content accumulates here, organized by topic/phase]
 
 ---
 
-## Planning Log
+## Working Notes
 
-Running capture of discussion. Use this to build the Specification above.
-
-### [timestamp] [Topic]
-
-[What was discussed, decisions made, reasoning.]
+[Optional - capture in-progress discussion if needed]
 ```
 
-## The Specification is the Deliverable
+## Critical Rules
 
-The Planning Log is working notes. The Specification section is what matters.
+**Present before logging**: Never write content to the draft until the user has seen and approved it.
 
-As you discuss:
-1. Capture in the Planning Log
-2. **Immediately** distill validated information into the Specification
-3. The Specification grows more complete with each exchange
+**Log verbatim**: When approved, write exactly what was presented - no silent modifications.
 
-## What to Capture
+**Commit frequently**: Commit at natural breaks and before any context refresh. Context refresh = lost work.
 
-Record **what the user said AND why**, not just conclusions.
-
-Capture:
-- Trade-offs considered
-- Alternatives rejected and why
-- Concerns raised and how addressed
-- Scope decisions (in/out and why)
-
-## Transitioning to Formal Planning
-
-Draft is complete when the Specification contains:
-- [ ] Clear WHAT and WHY
-- [ ] Scope boundaries (in/out)
-- [ ] Edge cases to handle
-- [ ] Testing ideas and acceptance criteria
-- [ ] Approach guidance (if needed)
-- [ ] No blocking open questions
-
-**Transition**:
-1. Review the Specification with user
-2. User confirms it's complete
-3. Proceed to formal planning → Load [formal-planning.md](formal-planning.md)
-4. Keep `draft-plan.md` for reference
+**Trust nothing without validation**: Synthesize and present, but never assume source material is correct.
 
 ## After Context Refresh
 
-If the draft exists: Read it. Trust it. The Specification has detail you've lost.
+Read the draft plan. It contains validated, approved content. Trust it - you built it together with the user.
 
-If no draft exists: You've lost the conversation. Be honest and ask again.
+If working notes exist, they show where you left off.
+
+## Transitioning to Formal Planning
+
+Draft is complete when:
+- All topics/phases have validated content
+- User confirms the specification is complete
+- No blocking gaps remain
+
+Then proceed to formal planning → Load [formal-planning.md](formal-planning.md)
