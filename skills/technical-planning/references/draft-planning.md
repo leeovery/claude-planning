@@ -59,6 +59,14 @@ Only when the user approves ("yes, log it", "that's good", etc.) do you write it
 ### 5. Repeat
 Move to the next topic.
 
+## Context Resurfacing
+
+When you discover information that affects **already-logged topics**, resurface them. Even mid-discussion - interrupt, flag what you found, and discuss whether it changes anything.
+
+If it does: summarize what's changing in the chat, then re-present the full updated topic. The summary is for discussion only - the draft plan just gets the clean replacement. Standard workflow applies: user approves before you update.
+
+This is encouraged. Better to resurface and confirm "already covered" than let something slip past.
+
 ## The Draft Document
 
 Create `draft-plan.md` in `docs/specs/plans/{topic-name}/`
