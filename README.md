@@ -185,7 +185,8 @@ Slash commands to quickly invoke the workflow.
 | Command | Description |
 |---------|-------------|
 | [**/start-discussion**](commands/start-discussion.md) | Begin a new technical discussion. Gathers topic, context, background information, and relevant codebase areas before starting documentation. |
-| [**/start-planning**](commands/start-planning.md) | Start a planning session from an existing discussion. Discovers available discussions, offers draft vs formal planning paths, and supports multiple output formats (markdown, Linear, Backlog.md). |
+| [**/start-specification**](commands/start-specification.md) | Start a specification session from an existing discussion. Validates and refines discussion content into a standalone specification. |
+| [**/start-planning**](commands/start-planning.md) | Start a planning session from an existing specification. Creates implementation plans with phases, tasks, and acceptance criteria. Supports multiple output formats (markdown, Linear, Backlog.md). |
 
 ## Requirements
 
