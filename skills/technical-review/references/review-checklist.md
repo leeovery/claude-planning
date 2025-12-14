@@ -7,9 +7,50 @@
 ## Before Starting
 
 1. Locate discussion doc: `docs/specs/discussions/{topic}/`
-2. Locate plan doc: `docs/specs/plans/{topic}/`
-3. Identify what code/files were changed
-4. Check for project-specific skills in `.claude/skills/`
+2. Locate specification: `docs/specs/specifications/{topic}/specification.md`
+3. Locate plan doc: `docs/specs/plans/{topic}/`
+4. Identify what code/files were changed
+5. Check for project-specific skills in `.claude/skills/`
+
+## Chain Verification
+
+This is the primary review task - verifying nothing was lost in translation.
+
+### Discussion → Specification
+
+For each key decision in the discussion:
+- Does it appear in the specification?
+- Was it accurately captured or did meaning change?
+- Were any decisions dropped without justification?
+
+For each edge case discussed:
+- Is it documented in the specification?
+- Was any nuance lost?
+
+### Specification → Plan
+
+For each requirement in the specification:
+- Is there a corresponding plan task?
+- Does the task fully address the requirement?
+- Were any spec items not planned?
+
+### Plan → Implementation
+
+For each planned task:
+- Was it implemented?
+- Does the implementation match the task description?
+- Were acceptance criteria actually met?
+
+### Full Chain Trace
+
+Pick 3-5 key decisions from the discussion and trace each one:
+1. Find it in the discussion doc
+2. Verify it's in the specification
+3. Verify it has plan task(s)
+4. Verify it's implemented
+5. Verify it's tested
+
+Flag any breaks in the chain.
 
 ## Discussion Compliance
 
@@ -29,6 +70,19 @@ For competing solutions that were rejected:
 
 - Did implementation accidentally use a rejected approach?
 - Are there traces of discarded ideas?
+
+## Specification Coverage
+
+For each validated requirement:
+
+- Is it implemented?
+- Is it tested?
+- Does the implementation match the spec exactly?
+
+Look for gaps:
+
+- Requirements in spec but not in code
+- Code that doesn't trace back to a spec requirement
 
 ## Plan Completion
 
@@ -82,6 +136,8 @@ General checks:
 
 ## Common Issues
 
+**Chain breaks**: Decision discussed but never made it to code
+
 **Partial implementation**: Task marked done but only happy path implemented
 
 **Test theater**: Tests pass but don't actually verify requirements
@@ -94,6 +150,8 @@ General checks:
 
 **Orphaned code**: Code added but not used or tested
 
+**Lost nuance**: Requirement simplified in a way that loses important detail
+
 ## Writing Feedback
 
 Be specific and actionable:
@@ -101,12 +159,12 @@ Be specific and actionable:
 - **Bad**: "Tests need improvement"
 - **Good**: "Test `test_cache_expiry` doesn't verify TTL, only that value is returned"
 
-Reference the artifact:
+Reference the artifact and chain position:
 
 - **Bad**: "This wasn't the agreed approach"
-- **Good**: "Discussion doc section 'Caching Strategy' decided on Redis, but implementation uses file cache"
+- **Good**: "Discussion doc section 'Caching Strategy' decided on Redis → Spec requirement 3.2 confirms Redis → Plan task 2.1 says 'implement Redis cache' → but implementation uses file cache. Chain broke at implementation."
 
 Distinguish blocking vs non-blocking:
 
-- Blocking: Required changes before shipping
-- Non-blocking: Recommendations for improvement
+- Blocking: Required changes before shipping (chain breaks, missing requirements)
+- Non-blocking: Recommendations for improvement (code style, minor optimizations)
