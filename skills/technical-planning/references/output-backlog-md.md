@@ -173,7 +173,7 @@ project/
 ## Implementation Reading
 
 Implementation will:
-1. Read `plan.md`, see `format: backlog-md`
+1. Read `planning/{topic}.md`, see `format: backlog-md`
 2. Query backlog via MCP or read `backlog/` directory
 3. Filter tasks by label (e.g., `phase-1`)
 4. Process in priority order (high → medium → low)

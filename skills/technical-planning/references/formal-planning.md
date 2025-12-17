@@ -121,6 +121,6 @@ Context refresh = memory loss. Uncommitted work = lost work.
 ## Output
 
 Load the appropriate output adapter for format-specific structure:
-- [output-local-markdown.md](output-local-markdown.md) - Single plan.md file
+- [output-local-markdown.md](output-local-markdown.md) - Single `{topic}.md` file
 - [output-linear.md](output-linear.md) - Linear project
 - [output-backlog-md.md](output-backlog-md.md) - Backlog.md tasks

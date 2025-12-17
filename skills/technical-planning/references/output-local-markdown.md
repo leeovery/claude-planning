@@ -17,7 +17,7 @@ This is a single file per topic in the planning directory.
 
 ## Template
 
-Create `plan.md` with this structure:
+Create `{topic}.md` with this structure:
 
 ```markdown
 ---

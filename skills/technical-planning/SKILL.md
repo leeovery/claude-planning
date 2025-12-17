@@ -32,7 +32,7 @@ The specification is the **sole source of truth**. It contains validated, approv
 **Load**: [formal-planning.md](references/formal-planning.md)
 
 **Then load output adapter** (ask user which format):
-- [output-local-markdown.md](references/output-local-markdown.md) - Single `plan.md` file (default)
+- [output-local-markdown.md](references/output-local-markdown.md) - Single `{topic}.md` file (default)
 - [output-linear.md](references/output-linear.md) - Linear project
 - [output-backlog-md.md](references/output-backlog-md.md) - Backlog.md tasks
 
