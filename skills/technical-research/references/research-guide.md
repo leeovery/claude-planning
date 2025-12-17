@@ -30,16 +30,11 @@ Don't constrain yourself. Research goes wherever it needs to go.
 When something worth capturing comes up, prompt the user:
 
 - "Shall I document that?"
-- "Would you like me to add that to [existing file]?"
-- "Should I create a new file for this - maybe [suggested name].md?"
+- "Would you like me to add that to the research doc?"
 
-Check where findings should go. Could be an existing file, could be a new one.
-
-## Output Structure
+## Output
 
 Research documents live in `docs/workflow/{topic}/research.md`.
-
-If multiple research files are needed, move to `docs/workflow/{topic}/research/` with semantically named files (e.g., `competitor-analysis.md`, `pricing-models.md`).
 
 ## Why Commit Frequently
 

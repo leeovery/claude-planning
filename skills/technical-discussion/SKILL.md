@@ -32,11 +32,7 @@ See **[meeting-assistant.md](references/meeting-assistant.md)** for detailed app
 
 ## Structure
 
-Discussions are stored in `docs/workflow/{topic}/discussion.md`. Each topic gets its own directory containing all workflow artifacts (discussion, specification, plan).
-
-**Single file (default):** `docs/workflow/{topic}/discussion.md`
-
-**Multiple files (when needed):** If a discussion needs to be split across multiple files, move them to a pluralized subdirectory: `docs/workflow/{topic}/discussions/` with semantically named files (e.g., `api-design.md`, `data-model.md`).
+**Output**: `docs/workflow/{topic}/discussion.md`
 
 Use **[template.md](references/template.md)** for structure:
 
@@ -56,13 +52,12 @@ See **[guidelines.md](references/guidelines.md)** for best practices and anti-ha
 
 ## Commit Frequently
 
-**Commit discussion docs often** to `docs/workflow/{topic}/`:
+**Commit discussion docs often**:
 
 - At natural breaks in discussion
 - When solutions to problems are identified
 - When discussion branches/forks to new topics
 - Before context refresh (prevents hallucination/memory loss)
-- When creating new files in the discussion directory
 
 **Why**: You lose memory on context refresh. Commits help you track, backtrack, and fill gaps. Critical for avoiding hallucination.
 

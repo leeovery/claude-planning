@@ -24,10 +24,6 @@ You're at step 1. Explore freely.
 
 **Output**: `docs/workflow/{topic}/research.md`
 
-**Single file (default):** `docs/workflow/{topic}/research.md`
-
-**Multiple files (when needed):** Move to `docs/workflow/{topic}/research/` with semantically named files.
-
 ## Critical Rules
 
 **Don't hallucinate**: Only document what was actually discussed.

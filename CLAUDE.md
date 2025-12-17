@@ -39,6 +39,5 @@ commands/
 - Discussion: `docs/workflow/{topic}/discussion.md`
 - Specification: `docs/workflow/{topic}/specification.md`
 - Plan: `docs/workflow/{topic}/plan.md`
-- Multiple files: Use pluralized subdirectory (e.g., `research/`, `discussions/`, `specifications/`, `plans/`)
 - Commit docs frequently (natural breaks, before context refresh)
 - Skills capture context, don't implement

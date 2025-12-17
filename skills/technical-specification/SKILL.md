@@ -26,10 +26,6 @@ You're at step 3. Build the specification. Don't jump to phases, tasks, or code.
 
 **Output**: `docs/workflow/{topic}/specification.md`
 
-**Single file (default):** `docs/workflow/{topic}/specification.md`
-
-**Multiple files (when needed):** Move to `docs/workflow/{topic}/specifications/` with semantically named files.
-
 **When complete**: User signs off, then proceed to technical-planning.
 
 ## What You Do

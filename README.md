@@ -90,17 +90,6 @@ docs/workflow/
 
 Each topic gets a single directory containing all its workflow artifacts. This keeps related documents together and makes it easy to see the complete picture for any feature.
 
-**Multiple files:** If any phase needs multiple files (e.g., multiple research threads), they move to a pluralized subdirectory:
-```
-docs/workflow/{topic}/
-├── research/              # plural = directory with multiple files
-│   ├── competitor-analysis.md
-│   └── pricing-models.md
-├── discussion.md
-├── specification.md
-└── plan.md
-```
-
 ## Skills
 
 | Skill | Phase | Description |
