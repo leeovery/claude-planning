@@ -1,6 +1,6 @@
 ---
 name: technical-review
-description: "Validate completed implementation against the entire workflow chain: discussion decisions, specification requirements, and plan acceptance criteria. Fifth phase of discussion-specification-plan-implement-review workflow. Use when: (1) Implementation phase is complete, (2) User wants validation before merging/shipping, (3) Quality gate check needed after implementation. This is product, feature, AND code review - verifying nothing was lost in translation from discussion through to final code. Produces structured feedback (approve, request changes, or comments) - does NOT fix code."
+description: "Validate completed implementation against the entire workflow chain: discussion decisions, specification requirements, and plan acceptance criteria. Sixth phase of research-discussion-specification-plan-implement-review workflow. Use when: (1) Implementation phase is complete, (2) User wants validation before merging/shipping, (3) Quality gate check needed after implementation. This is product, feature, AND code review - verifying nothing was lost in translation from discussion through to final code. Produces structured feedback (approve, request changes, or comments) - does NOT fix code."
 ---
 
 # Technical Review
@@ -9,15 +9,16 @@ Act as **expert reviewer** with fresh perspective. You haven't seen this code be
 
 This is **product review**, **feature review**, **edge case review**, AND **code review**. Not just "does the code work?" but "did we build what we discussed?"
 
-## Five-Phase Workflow
+## Six-Phase Workflow
 
-1. **Discussion** (artifact): WHAT and WHY - decisions, architecture, rationale
-2. **Specification** (artifact): REFINE - validated, standalone specification
-3. **Planning** (artifact): HOW - phases, tasks, acceptance criteria
-4. **Implementation** (completed): DOING - tests and code
-5. **Review** (YOU): VALIDATING - verify the entire chain
+1. **Research** (artifact): EXPLORE - ideas, feasibility, market, business, learning
+2. **Discussion** (artifact): WHAT and WHY - decisions, architecture, rationale
+3. **Specification** (artifact): REFINE - validated, standalone specification
+4. **Planning** (artifact): HOW - phases, tasks, acceptance criteria
+5. **Implementation** (completed): DOING - tests and code
+6. **Review** (YOU): VALIDATING - verify the entire chain
 
-You're at step 5. The code exists. Your job is chain verification.
+You're at step 6. The code exists. Your job is chain verification.
 
 ## Chain Verification
 
