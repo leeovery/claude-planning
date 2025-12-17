@@ -215,6 +215,7 @@ Please open an issue first to discuss significant changes.
 
 - [**claude-manager**](https://github.com/leeovery/claude-manager) — The plugin manager that powers skill installation
 - [**claude-laravel**](https://github.com/leeovery/claude-laravel) — Laravel development skills for Claude Code
+- [**claude-nuxt**](https://github.com/leeovery/claude-nuxt) — Nuxt.js development skills for Claude Code
 
 ## License
 

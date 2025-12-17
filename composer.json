@@ -16,6 +16,7 @@
     "config": {
         "allow-plugins": {
             "leeovery/claude-manager": true
-        }
+        },
+        "root-version": "1.0.0"
     }
 }
